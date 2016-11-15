@@ -2,7 +2,7 @@
 D language binding to GDAL C interface
 
 ## GDAL
-The GDAL website is [gdal.org] and has a lot of documentation. When reading the
+The GDAL website is [gdal.org](gdal.org) and has a lot of documentation. When reading the
 documentation and tutorials, remember this binding was created for the C-API.
 
 ## Update
