@@ -1,4 +1,4 @@
-name "GDAL-2-Binding"
+name "gdal2"
 
 authors "Ryan Leach"
 description "Binding to GDAL library C interface."
