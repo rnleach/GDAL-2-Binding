@@ -1,0 +1,8 @@
+Example command when creating bindings:
+
+htod /c/devLibs/gdal21/include/gdal_version.h ./gdal_version.d -I/c/dm/include
+
+This assumes that you have htod and Digital Mars C compiler installed.
+I run this command from the PFBd/source/gdal/original folder. Then you can do
+a diff with the original files in that folder to see the changes there and 
+therefore what changes are needed in the bindings.

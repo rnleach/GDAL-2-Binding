@@ -1,0 +1,38 @@
+{
+  "folders":
+  [
+    {
+      "path": ".",
+      "folder_exclude_patterns":["dist", ".dub"],
+      "file_exclude_patterns":["*.selections.json", "*.sublime-project"]
+    }
+  ],
+
+  "build_systems":
+  [
+    {
+      "name": "DMD Test",
+      "cmd":["dub", "test", "-v", "--force", "--arch=x86_64", "--compiler=dmd"]
+    },
+    {
+      "name": "DMD Build",
+      "cmd":["dub", "build", "-v", "--force", "--arch=x86_64", "--compiler=dmd"]
+    },
+    {
+      "name": "DMD Run",
+      "cmd":["dub", "run", "-v", "--force", "--arch=x86_64", "--compiler=dmd"]
+    },
+    {
+      "name": "LDC Test",
+      "cmd":["dub", "test", "-v", "--force", "--arch=x86_64", "--compiler=ldc2"]
+    },
+    {
+      "name": "LDC Build",
+      "cmd":["dub", "build", "-v", "--force", "--arch=x86_64", "--compiler=ldc2"]
+    },
+    {
+      "name": "LDC2 Run",
+      "cmd":["dub", "run", "-v", "--force", "--arch=x86_64", "--compiler=ldc2"]
+    },
+  ]
+}

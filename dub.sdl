@@ -1,0 +1,16 @@
+name "GDAL-2-Binding"
+
+authors "Ryan Leach"
+description "Binding to GDAL library C interface."
+copyright "Copyright © 2016, Ryan Leach"
+license "MIT"
+homepage "https://github.com/rnleach/GDAL-2-Binding"
+
+targetName "GDAL-2-Binding"
+targetType "sourceLibrary"
+
+//
+// htod ported header files for GDAL. Keep these for reference for updating
+// the bindings later, but do not include them in the compilation.
+//
+excludedSourceFiles "source/gdal/original/*.d"
