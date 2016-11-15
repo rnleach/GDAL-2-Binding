@@ -7,3 +7,11 @@ documentation and tutorials, remember this binding was created for the C-API.
 
 ## Update
 Current binding is to GDAL 2.1.0.
+
+## Completeness
+Currently the vast majority of the C-interface has bindings created. The virtual
+memory portion of the API has not had bindings created yet. If I had created
+bindings for these functions, it would have required a whole host of other
+header files be binded also, and the API was quickly growing larger than I 
+want to maintain.
+ 
