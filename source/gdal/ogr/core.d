@@ -69,7 +69,7 @@ alias _N2 OGREnvelope3D;
 void * OGRMalloc(size_t );
 void * OGRCalloc(size_t , size_t );
 void * OGRRealloc(void *, size_t );
-char * OGRStrdup(char *);
+char * OGRStrdup(const(char) *);
 void  OGRFree(void *);
 
 alias int OGRErr;
@@ -221,7 +221,7 @@ alias wkbSetM = OGR_GT_SetM;
 
 enum ogrZMarker = 0x21125711;
 
-char * OGRGeometryTypeToName(OGRwkbGeometryType eType);
+const(char) * OGRGeometryTypeToName(OGRwkbGeometryType eType);
 OGRwkbGeometryType  OGRMergeGeometryTypes(OGRwkbGeometryType eMain, OGRwkbGeometryType eExtra);
 OGRwkbGeometryType  OGRMergeGeometryTypesEx(OGRwkbGeometryType eMain, OGRwkbGeometryType eExtra, int bAllowPromotingToCurves);
 OGRwkbGeometryType  OGR_GT_Flatten(OGRwkbGeometryType eType);
@@ -466,7 +466,7 @@ int OGR_GET_MS(double floatingpoint_sec)
     cast(int)((floatingpoint_sec - cast(int)(floatingpoint_sec)) * 1000 + 0.5);
 }
 
-int  OGRParseDate(char *pszInput, OGRField *psOutput, int nOptions);
+int  OGRParseDate(const(char) *pszInput, OGRField *psOutput, int nOptions);
 
 /* -------------------------------------------------------------------- */
 /*      Constants from ogrsf_frmts.h for capabilities.                  */
@@ -633,7 +633,7 @@ alias ogr_style_tool_param_label_id OGRSTLabelParam;
 /* Note to developers : please keep this section in sync with gdal.h */
 
 extern (Windows):
-char * GDALVersionInfo(char *);
+const(char) * GDALVersionInfo(const(char) *);
 
 
 /** Return TRUE if GDAL library version at runtime matches nVersionMajor.nVersionMinor.
@@ -647,9 +647,4 @@ char * GDALVersionInfo(char *);
                                    will issue a failure mentioning the name of
                                    the calling component.
   */
-int  GDALCheckVersion(int nVersionMajor, int nVersionMinor, char *pszCallingComponentName);
-
-/** Helper macro for GDALCheckVersion */
-
-
-
+int  GDALCheckVersion(int nVersionMajor, int nVersionMinor, const(char) *pszCallingComponentName);

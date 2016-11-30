@@ -87,12 +87,12 @@ OGRErr  OGR_G_ImportFromWkt(OGRGeometryH , char **);
 OGRErr  OGR_G_ExportToWkt(OGRGeometryH , char **);
 OGRErr  OGR_G_ExportToIsoWkt(OGRGeometryH , char **);
 OGRwkbGeometryType  OGR_G_GetGeometryType(OGRGeometryH );
-char * OGR_G_GetGeometryName(OGRGeometryH );
-void  OGR_G_DumpReadable(OGRGeometryH , FILE *, char *);
+const(char) * OGR_G_GetGeometryName(OGRGeometryH );
+void  OGR_G_DumpReadable(OGRGeometryH , FILE *, const(char) *);
 void  OGR_G_FlattenTo2D(OGRGeometryH );
 void  OGR_G_CloseRings(OGRGeometryH );
 
-OGRGeometryH  OGR_G_CreateFromGML(char *);
+OGRGeometryH  OGR_G_CreateFromGML(const(char) *);
 char * OGR_G_ExportToGML(OGRGeometryH );
 char * OGR_G_ExportToGMLEx(OGRGeometryH , char **papszOptions);
 
@@ -100,11 +100,11 @@ OGRGeometryH  OGR_G_CreateFromGMLTree(CPLXMLNode *);
 CPLXMLNode * OGR_G_ExportToGMLTree(OGRGeometryH );
 CPLXMLNode * OGR_G_ExportEnvelopeToGMLTree(OGRGeometryH );
 
-char * OGR_G_ExportToKML(OGRGeometryH , char *pszAltitudeMode);
+char * OGR_G_ExportToKML(OGRGeometryH , const(char) *pszAltitudeMode);
 
 char * OGR_G_ExportToJson(OGRGeometryH );
 char * OGR_G_ExportToJsonEx(OGRGeometryH , char **papszOptions);
-OGRGeometryH  OGR_G_CreateGeometryFromJson(char *);
+OGRGeometryH  OGR_G_CreateGeometryFromJson(const(char) *);
 
 void  OGR_G_AssignSpatialReference(OGRGeometryH , OGRSpatialReferenceH );
 OGRSpatialReferenceH  OGR_G_GetSpatialReference(OGRGeometryH );
@@ -213,11 +213,11 @@ alias void* OGRGeomFieldDefnH;
 
 /* OGRFieldDefn */
 
-OGRFieldDefnH  OGR_Fld_Create(char *, OGRFieldType );
+OGRFieldDefnH  OGR_Fld_Create(const(char) *, OGRFieldType );
 void  OGR_Fld_Destroy(OGRFieldDefnH );
 
-void  OGR_Fld_SetName(OGRFieldDefnH , char *);
-char * OGR_Fld_GetNameRef(OGRFieldDefnH );
+void  OGR_Fld_SetName(OGRFieldDefnH , const(char) *);
+const(char) * OGR_Fld_GetNameRef(OGRFieldDefnH );
 OGRFieldType  OGR_Fld_GetType(OGRFieldDefnH );
 void  OGR_Fld_SetType(OGRFieldDefnH , OGRFieldType );
 OGRFieldSubType  OGR_Fld_GetSubType(OGRFieldDefnH );
@@ -228,26 +228,26 @@ int  OGR_Fld_GetWidth(OGRFieldDefnH );
 void  OGR_Fld_SetWidth(OGRFieldDefnH , int );
 int  OGR_Fld_GetPrecision(OGRFieldDefnH );
 void  OGR_Fld_SetPrecision(OGRFieldDefnH , int );
-void  OGR_Fld_Set(OGRFieldDefnH , char *, OGRFieldType , int , int , OGRJustification );
+void  OGR_Fld_Set(OGRFieldDefnH , const(char) *, OGRFieldType , int , int , OGRJustification );
 int  OGR_Fld_IsIgnored(OGRFieldDefnH hDefn);
 void  OGR_Fld_SetIgnored(OGRFieldDefnH hDefn, int );
 int  OGR_Fld_IsNullable(OGRFieldDefnH hDefn);
 void  OGR_Fld_SetNullable(OGRFieldDefnH hDefn, int );
-char * OGR_Fld_GetDefault(OGRFieldDefnH hDefn);
-void  OGR_Fld_SetDefault(OGRFieldDefnH hDefn, char *);
+const(char) * OGR_Fld_GetDefault(OGRFieldDefnH hDefn);
+void  OGR_Fld_SetDefault(OGRFieldDefnH hDefn, const(char) *);
 int  OGR_Fld_IsDefaultDriverSpecific(OGRFieldDefnH hDefn);
 
-char * OGR_GetFieldTypeName(OGRFieldType );
-char * OGR_GetFieldSubTypeName(OGRFieldSubType );
+const(char) * OGR_GetFieldTypeName(OGRFieldType );
+const(char) * OGR_GetFieldSubTypeName(OGRFieldSubType );
 int  OGR_AreTypeSubTypeCompatible(OGRFieldType eType, OGRFieldSubType eSubType);
 
 /* OGRGeomFieldDefnH */
 
-OGRGeomFieldDefnH  OGR_GFld_Create(char *, OGRwkbGeometryType );
+OGRGeomFieldDefnH  OGR_GFld_Create(const(char) *, OGRwkbGeometryType );
 void  OGR_GFld_Destroy(OGRGeomFieldDefnH );
 
-void  OGR_GFld_SetName(OGRGeomFieldDefnH , char *);
-char * OGR_GFld_GetNameRef(OGRGeomFieldDefnH );
+void  OGR_GFld_SetName(OGRGeomFieldDefnH , const(char) *);
+const(char) * OGR_GFld_GetNameRef(OGRGeomFieldDefnH );
 
 OGRwkbGeometryType  OGR_GFld_GetType(OGRGeomFieldDefnH );
 void  OGR_GFld_SetType(OGRGeomFieldDefnH , OGRwkbGeometryType );
@@ -263,13 +263,13 @@ void  OGR_GFld_SetIgnored(OGRGeomFieldDefnH hDefn, int );
 
 /* OGRFeatureDefn */
 
-OGRFeatureDefnH  OGR_FD_Create(char *);
+OGRFeatureDefnH  OGR_FD_Create(const(char) *);
 void  OGR_FD_Destroy(OGRFeatureDefnH );
 void  OGR_FD_Release(OGRFeatureDefnH );
-char * OGR_FD_GetName(OGRFeatureDefnH );
+const(char) * OGR_FD_GetName(OGRFeatureDefnH );
 int  OGR_FD_GetFieldCount(OGRFeatureDefnH );
 OGRFieldDefnH  OGR_FD_GetFieldDefn(OGRFeatureDefnH , int );
-int  OGR_FD_GetFieldIndex(OGRFeatureDefnH , char *);
+int  OGR_FD_GetFieldIndex(OGRFeatureDefnH , const(char) *);
 void  OGR_FD_AddFieldDefn(OGRFeatureDefnH , OGRFieldDefnH );
 OGRErr  OGR_FD_DeleteFieldDefn(OGRFeatureDefnH hDefn, int iField);
 OGRErr  OGR_FD_ReorderFieldDefns(OGRFeatureDefnH hDefn, int *panMap);
@@ -285,7 +285,7 @@ int  OGR_FD_GetReferenceCount(OGRFeatureDefnH );
 
 int  OGR_FD_GetGeomFieldCount(OGRFeatureDefnH hFDefn);
 OGRGeomFieldDefnH  OGR_FD_GetGeomFieldDefn(OGRFeatureDefnH hFDefn, int i);
-int  OGR_FD_GetGeomFieldIndex(OGRFeatureDefnH hFDefn, char *pszName);
+int  OGR_FD_GetGeomFieldIndex(OGRFeatureDefnH hFDefn, const(char) *pszName);
 
 void  OGR_FD_AddGeomFieldDefn(OGRFeatureDefnH hFDefn, OGRGeomFieldDefnH hGFldDefn);
 OGRErr  OGR_FD_DeleteGeomFieldDefn(OGRFeatureDefnH hFDefn, int iGeomField);
@@ -305,7 +305,7 @@ int  OGR_F_Equal(OGRFeatureH , OGRFeatureH );
 
 int  OGR_F_GetFieldCount(OGRFeatureH );
 OGRFieldDefnH  OGR_F_GetFieldDefnRef(OGRFeatureH , int );
-int  OGR_F_GetFieldIndex(OGRFeatureH , char *);
+int  OGR_F_GetFieldIndex(OGRFeatureH , const(char) *);
 
 int  OGR_F_IsFieldSet(OGRFeatureH , int );
 void  OGR_F_UnsetField(OGRFeatureH , int );
@@ -314,7 +314,7 @@ OGRField * OGR_F_GetRawFieldRef(OGRFeatureH , int );
 int  OGR_F_GetFieldAsInteger(OGRFeatureH , int );
 GIntBig  OGR_F_GetFieldAsInteger64(OGRFeatureH , int );
 double  OGR_F_GetFieldAsDouble(OGRFeatureH , int );
-char * OGR_F_GetFieldAsString(OGRFeatureH , int );
+const(char) * OGR_F_GetFieldAsString(OGRFeatureH , int );
 int * OGR_F_GetFieldAsIntegerList(OGRFeatureH , int , int *);
 GIntBig * OGR_F_GetFieldAsInteger64List(OGRFeatureH , int , int *);
 double * OGR_F_GetFieldAsDoubleList(OGRFeatureH , int , int *);
@@ -326,7 +326,7 @@ int  OGR_F_GetFieldAsDateTimeEx(OGRFeatureH hFeat, int iField, int *pnYear, int 
 void  OGR_F_SetFieldInteger(OGRFeatureH , int , int );
 void  OGR_F_SetFieldInteger64(OGRFeatureH , int , GIntBig );
 void  OGR_F_SetFieldDouble(OGRFeatureH , int , double );
-void  OGR_F_SetFieldString(OGRFeatureH , int , char *);
+void  OGR_F_SetFieldString(OGRFeatureH , int , const(char) *);
 void  OGR_F_SetFieldIntegerList(OGRFeatureH , int , int , int *);
 void  OGR_F_SetFieldInteger64List(OGRFeatureH , int , int , GIntBig *);
 void  OGR_F_SetFieldDoubleList(OGRFeatureH , int , int , double *);
@@ -338,7 +338,7 @@ void  OGR_F_SetFieldDateTimeEx(OGRFeatureH , int , int , int , int , int , int ,
 
 int  OGR_F_GetGeomFieldCount(OGRFeatureH hFeat);
 OGRGeomFieldDefnH  OGR_F_GetGeomFieldDefnRef(OGRFeatureH hFeat, int iField);
-int  OGR_F_GetGeomFieldIndex(OGRFeatureH hFeat, char *pszName);
+int  OGR_F_GetGeomFieldIndex(OGRFeatureH hFeat, const(char) *pszName);
 
 OGRGeometryH  OGR_F_GetGeomFieldRef(OGRFeatureH hFeat, int iField);
 OGRErr  OGR_F_SetGeomFieldDirectly(OGRFeatureH hFeat, int iField, OGRGeometryH hGeom);
@@ -350,17 +350,17 @@ void  OGR_F_DumpReadable(OGRFeatureH , FILE *);
 OGRErr  OGR_F_SetFrom(OGRFeatureH , OGRFeatureH , int );
 OGRErr  OGR_F_SetFromWithMap(OGRFeatureH , OGRFeatureH , int , int *);
 
-char * OGR_F_GetStyleString(OGRFeatureH );
-void  OGR_F_SetStyleString(OGRFeatureH , char *);
+const(char) * OGR_F_GetStyleString(OGRFeatureH );
+void  OGR_F_SetStyleString(OGRFeatureH , const(char) *);
 void  OGR_F_SetStyleStringDirectly(OGRFeatureH , char *);
 OGRStyleTableH  OGR_F_GetStyleTable(OGRFeatureH );
 void  OGR_F_SetStyleTableDirectly(OGRFeatureH , OGRStyleTableH );
 void  OGR_F_SetStyleTable(OGRFeatureH , OGRStyleTableH );
 
-char * OGR_F_GetNativeData(OGRFeatureH );
-void  OGR_F_SetNativeData(OGRFeatureH , char *);
-char * OGR_F_GetNativeMediaType(OGRFeatureH );
-void  OGR_F_SetNativeMediaType(OGRFeatureH , char *);
+const(char) * OGR_F_GetNativeData(OGRFeatureH );
+void  OGR_F_SetNativeData(OGRFeatureH , const(char) *);
+const(char) * OGR_F_GetNativeMediaType(OGRFeatureH );
+void  OGR_F_SetNativeMediaType(OGRFeatureH , const(char) *);
 
 void  OGR_F_FillUnsetWithDefault(OGRFeatureH hFeat, int bNotNullableOnly, char **papszOptions);
 int  OGR_F_Validate(OGRFeatureH , int nValidateFlags, int bEmitError);
@@ -375,14 +375,14 @@ alias void *OGRSFDriverH;
 
 /* OGRLayer */
 
-char * OGR_L_GetName(OGRLayerH );
+const(char) * OGR_L_GetName(OGRLayerH );
 OGRwkbGeometryType  OGR_L_GetGeomType(OGRLayerH );
 OGRGeometryH  OGR_L_GetSpatialFilter(OGRLayerH );
 void  OGR_L_SetSpatialFilter(OGRLayerH , OGRGeometryH );
 void  OGR_L_SetSpatialFilterRect(OGRLayerH , double , double , double , double );
 void  OGR_L_SetSpatialFilterEx(OGRLayerH , int iGeomField, OGRGeometryH hGeom);
 void  OGR_L_SetSpatialFilterRectEx(OGRLayerH , int iGeomField, double dfMinX, double dfMinY, double dfMaxX, double dfMaxY);
-OGRErr  OGR_L_SetAttributeFilter(OGRLayerH , char *);
+OGRErr  OGR_L_SetAttributeFilter(OGRLayerH , const(char) *);
 void  OGR_L_ResetReading(OGRLayerH );
 OGRFeatureH  OGR_L_GetNextFeature(OGRLayerH );
 OGRErr  OGR_L_SetNextByIndex(OGRLayerH , GIntBig );
@@ -392,11 +392,11 @@ OGRErr  OGR_L_CreateFeature(OGRLayerH , OGRFeatureH );
 OGRErr  OGR_L_DeleteFeature(OGRLayerH , GIntBig );
 OGRFeatureDefnH  OGR_L_GetLayerDefn(OGRLayerH );
 OGRSpatialReferenceH  OGR_L_GetSpatialRef(OGRLayerH );
-int  OGR_L_FindFieldIndex(OGRLayerH , char *, int bExactMatch);
+int  OGR_L_FindFieldIndex(OGRLayerH , const(char) *, int bExactMatch);
 GIntBig  OGR_L_GetFeatureCount(OGRLayerH , int );
 OGRErr  OGR_L_GetExtent(OGRLayerH , OGREnvelope *, int );
 OGRErr  OGR_L_GetExtentEx(OGRLayerH , int iGeomField, OGREnvelope *psExtent, int bForce);
-int  OGR_L_TestCapability(OGRLayerH , char *);
+int  OGR_L_TestCapability(OGRLayerH , const(char) *);
 OGRErr  OGR_L_CreateField(OGRLayerH , OGRFieldDefnH , int );
 OGRErr  OGR_L_CreateGeomField(OGRLayerH hLayer, OGRGeomFieldDefnH hFieldDefn, int bForce);
 OGRErr  OGR_L_DeleteField(OGRLayerH , int iField);
@@ -411,12 +411,12 @@ int  OGR_L_Dereference(OGRLayerH );
 int  OGR_L_GetRefCount(OGRLayerH );
 OGRErr  OGR_L_SyncToDisk(OGRLayerH );
 GIntBig  OGR_L_GetFeaturesRead(OGRLayerH );
-char * OGR_L_GetFIDColumn(OGRLayerH );
-char * OGR_L_GetGeometryColumn(OGRLayerH );
+const(char) * OGR_L_GetFIDColumn(OGRLayerH );
+const(char) * OGR_L_GetGeometryColumn(OGRLayerH );
 OGRStyleTableH  OGR_L_GetStyleTable(OGRLayerH );
 void  OGR_L_SetStyleTableDirectly(OGRLayerH , OGRStyleTableH );
 void  OGR_L_SetStyleTable(OGRLayerH , OGRStyleTableH );
-OGRErr  OGR_L_SetIgnoredFields(OGRLayerH , char **);
+OGRErr  OGR_L_SetIgnoredFields(OGRLayerH , const(char*)*);
 OGRErr  OGR_L_Intersection(OGRLayerH , OGRLayerH , OGRLayerH , char **, GDALProgressFunc , void *);
 OGRErr  OGR_L_Union(OGRLayerH , OGRLayerH , OGRLayerH , char **, GDALProgressFunc , void *);
 OGRErr  OGR_L_SymDifference(OGRLayerH , OGRLayerH , OGRLayerH , char **, GDALProgressFunc , void *);
@@ -428,16 +428,16 @@ OGRErr  OGR_L_Erase(OGRLayerH , OGRLayerH , OGRLayerH , char **, GDALProgressFun
 /* OGRDataSource */
 
 void  OGR_DS_Destroy(OGRDataSourceH );
-char * OGR_DS_GetName(OGRDataSourceH );
+const(char) * OGR_DS_GetName(OGRDataSourceH );
 int  OGR_DS_GetLayerCount(OGRDataSourceH );
 OGRLayerH  OGR_DS_GetLayer(OGRDataSourceH , int );
-OGRLayerH  OGR_DS_GetLayerByName(OGRDataSourceH , char *);
+OGRLayerH  OGR_DS_GetLayerByName(OGRDataSourceH , const(char) *);
 OGRErr  OGR_DS_DeleteLayer(OGRDataSourceH , int );
 OGRSFDriverH  OGR_DS_GetDriver(OGRDataSourceH );
-OGRLayerH  OGR_DS_CreateLayer(OGRDataSourceH , char *, OGRSpatialReferenceH , OGRwkbGeometryType , char **);
-OGRLayerH  OGR_DS_CopyLayer(OGRDataSourceH , OGRLayerH , char *, char **);
-int  OGR_DS_TestCapability(OGRDataSourceH , char *);
-OGRLayerH  OGR_DS_ExecuteSQL(OGRDataSourceH , char *, OGRGeometryH , char *);
+OGRLayerH  OGR_DS_CreateLayer(OGRDataSourceH , const(char) *, OGRSpatialReferenceH , OGRwkbGeometryType , char **);
+OGRLayerH  OGR_DS_CopyLayer(OGRDataSourceH , OGRLayerH , const(char) *, char **);
+int  OGR_DS_TestCapability(OGRDataSourceH , const(char) *);
+OGRLayerH  OGR_DS_ExecuteSQL(OGRDataSourceH , const(char) *, OGRGeometryH , const(char) *);
 void  OGR_DS_ReleaseResultSet(OGRDataSourceH , OGRLayerH );
 int  OGR_DS_Reference(OGRDataSourceH );
 int  OGR_DS_Dereference(OGRDataSourceH );
@@ -450,23 +450,23 @@ void  OGR_DS_SetStyleTable(OGRDataSourceH , OGRStyleTableH );
 
 /* OGRSFDriver */
 
-char * OGR_Dr_GetName(OGRSFDriverH );
-OGRDataSourceH  OGR_Dr_Open(OGRSFDriverH , char *, int );
-int  OGR_Dr_TestCapability(OGRSFDriverH , char *);
-OGRDataSourceH  OGR_Dr_CreateDataSource(OGRSFDriverH , char *, char **);
-OGRDataSourceH  OGR_Dr_CopyDataSource(OGRSFDriverH , OGRDataSourceH , char *, char **);
-OGRErr  OGR_Dr_DeleteDataSource(OGRSFDriverH , char *);
+const(char) * OGR_Dr_GetName(OGRSFDriverH );
+OGRDataSourceH  OGR_Dr_Open(OGRSFDriverH , const(char) *, int );
+int  OGR_Dr_TestCapability(OGRSFDriverH , const(char) *);
+OGRDataSourceH  OGR_Dr_CreateDataSource(OGRSFDriverH , const(char) *, char **);
+OGRDataSourceH  OGR_Dr_CopyDataSource(OGRSFDriverH , OGRDataSourceH , const(char) *, char **);
+OGRErr  OGR_Dr_DeleteDataSource(OGRSFDriverH , const(char) *);
 
 /* OGRSFDriverRegistrar */
 
-OGRDataSourceH  OGROpen(char *, int , OGRSFDriverH *);
-OGRDataSourceH  OGROpenShared(char *, int , OGRSFDriverH *);
+OGRDataSourceH  OGROpen(const(char) *, int , OGRSFDriverH *);
+OGRDataSourceH  OGROpenShared(const(char) *, int , OGRSFDriverH *);
 OGRErr  OGRReleaseDataSource(OGRDataSourceH );
 void  OGRRegisterDriver(OGRSFDriverH );
 void  OGRDeregisterDriver(OGRSFDriverH );
 int  OGRGetDriverCount();
 OGRSFDriverH  OGRGetDriver(int );
-OGRSFDriverH  OGRGetDriverByName(char *);
+OGRSFDriverH  OGRGetDriverByName(const(char) *);
 int  OGRGetOpenDSCount();
 OGRDataSourceH  OGRGetOpenDS(int iDS);
 
@@ -487,12 +487,12 @@ alias void *OGRStyleToolH;
 OGRStyleMgrH  OGR_SM_Create(OGRStyleTableH hStyleTable);
 void  OGR_SM_Destroy(OGRStyleMgrH hSM);
 
-char * OGR_SM_InitFromFeature(OGRStyleMgrH hSM, OGRFeatureH hFeat);
-int  OGR_SM_InitStyleString(OGRStyleMgrH hSM, char *pszStyleString);
-int  OGR_SM_GetPartCount(OGRStyleMgrH hSM, char *pszStyleString);
-OGRStyleToolH  OGR_SM_GetPart(OGRStyleMgrH hSM, int nPartId, char *pszStyleString);
+const(char) * OGR_SM_InitFromFeature(OGRStyleMgrH hSM, OGRFeatureH hFeat);
+int  OGR_SM_InitStyleString(OGRStyleMgrH hSM, const(char) *pszStyleString);
+int  OGR_SM_GetPartCount(OGRStyleMgrH hSM, const(char) *pszStyleString);
+OGRStyleToolH  OGR_SM_GetPart(OGRStyleMgrH hSM, int nPartId, const(char) *pszStyleString);
 int  OGR_SM_AddPart(OGRStyleMgrH hSM, OGRStyleToolH hST);
-int  OGR_SM_AddStyle(OGRStyleMgrH hSM, char *pszStyleName, char *pszStyleString);
+int  OGR_SM_AddStyle(OGRStyleMgrH hSM, const(char) *pszStyleName, const(char) *pszStyleString);
 
 /* OGRStyleTool */
 
@@ -504,26 +504,24 @@ OGRSTClassId  OGR_ST_GetType(OGRStyleToolH hST);
 OGRSTUnitId  OGR_ST_GetUnit(OGRStyleToolH hST);
 void  OGR_ST_SetUnit(OGRStyleToolH hST, OGRSTUnitId eUnit, double dfGroundPaperScale);
 
-char * OGR_ST_GetParamStr(OGRStyleToolH hST, int eParam, int *bValueIsNull);
+const(char) * OGR_ST_GetParamStr(OGRStyleToolH hST, int eParam, int *bValueIsNull);
 int  OGR_ST_GetParamNum(OGRStyleToolH hST, int eParam, int *bValueIsNull);
 double  OGR_ST_GetParamDbl(OGRStyleToolH hST, int eParam, int *bValueIsNull);
-void  OGR_ST_SetParamStr(OGRStyleToolH hST, int eParam, char *pszValue);
+void  OGR_ST_SetParamStr(OGRStyleToolH hST, int eParam, const(char) *pszValue);
 void  OGR_ST_SetParamNum(OGRStyleToolH hST, int eParam, int nValue);
 void  OGR_ST_SetParamDbl(OGRStyleToolH hST, int eParam, double dfValue);
-char * OGR_ST_GetStyleString(OGRStyleToolH hST);
+const(char) * OGR_ST_GetStyleString(OGRStyleToolH hST);
 
-int  OGR_ST_GetRGBFromString(OGRStyleToolH hST, char *pszColor, int *pnRed, int *pnGreen, int *pnBlue, int *pnAlpha);
+int  OGR_ST_GetRGBFromString(OGRStyleToolH hST, const(char) *pszColor, int *pnRed, int *pnGreen, int *pnBlue, int *pnAlpha);
 
 /* OGRStyleTable */
 
 OGRStyleTableH  OGR_STBL_Create();
 void  OGR_STBL_Destroy(OGRStyleTableH hSTBL);
-int  OGR_STBL_AddStyle(OGRStyleTableH hStyleTable, char *pszName, char *pszStyleString);
-int  OGR_STBL_SaveStyleTable(OGRStyleTableH hStyleTable, char *pszFilename);
-int  OGR_STBL_LoadStyleTable(OGRStyleTableH hStyleTable, char *pszFilename);
-char * OGR_STBL_Find(OGRStyleTableH hStyleTable, char *pszName);
+int  OGR_STBL_AddStyle(OGRStyleTableH hStyleTable, const(char) *pszName, const(char) *pszStyleString);
+int  OGR_STBL_SaveStyleTable(OGRStyleTableH hStyleTable, const(char) *pszFilename);
+int  OGR_STBL_LoadStyleTable(OGRStyleTableH hStyleTable, const(char) *pszFilename);
+const(char) * OGR_STBL_Find(OGRStyleTableH hStyleTable, char *pszName);
 void  OGR_STBL_ResetStyleStringReading(OGRStyleTableH hStyleTable);
-char * OGR_STBL_GetNextStyle(OGRStyleTableH hStyleTable);
-char * OGR_STBL_GetLastStyleName(OGRStyleTableH hStyleTable);
-
-
+const(char) * OGR_STBL_GetNextStyle(OGRStyleTableH hStyleTable);
+const(char) * OGR_STBL_GetLastStyleName(OGRStyleTableH hStyleTable);

@@ -114,22 +114,22 @@ struct CPLXMLNode
 }
 
 
-CPLXMLNode * CPLParseXMLString(char *);
+CPLXMLNode * CPLParseXMLString(const(char) *);
 void  CPLDestroyXMLNode(CPLXMLNode *);
-CPLXMLNode * CPLGetXMLNode(CPLXMLNode *poRoot, char *pszPath);
-CPLXMLNode * CPLSearchXMLNode(CPLXMLNode *poRoot, char *pszTarget);
-char * CPLGetXMLValue(CPLXMLNode *poRoot, char *pszPath, char *pszDefault);
-CPLXMLNode * CPLCreateXMLNode(CPLXMLNode *poParent, CPLXMLNodeType eType, char *pszText);
+CPLXMLNode * CPLGetXMLNode(CPLXMLNode *poRoot, const(char) *pszPath);
+CPLXMLNode * CPLSearchXMLNode(CPLXMLNode *poRoot, const(char) *pszTarget);
+const(char) * CPLGetXMLValue(CPLXMLNode *poRoot, const(char) *pszPath, const(char) *pszDefault);
+CPLXMLNode * CPLCreateXMLNode(CPLXMLNode *poParent, CPLXMLNodeType eType, const(char) *pszText);
 char * CPLSerializeXMLTree(CPLXMLNode *psNode);
 void  CPLAddXMLChild(CPLXMLNode *psParent, CPLXMLNode *psChild);
 int  CPLRemoveXMLChild(CPLXMLNode *psParent, CPLXMLNode *psChild);
 void  CPLAddXMLSibling(CPLXMLNode *psOlderSibling, CPLXMLNode *psNewSibling);
-CPLXMLNode * CPLCreateXMLElementAndValue(CPLXMLNode *psParent, char *pszName, char *pszValue);
-void  CPLAddXMLAttributeAndValue(CPLXMLNode *psParent, char *pszName, char *pszValue);
+CPLXMLNode * CPLCreateXMLElementAndValue(CPLXMLNode *psParent, const(char) *pszName, const(char) *pszValue);
+void  CPLAddXMLAttributeAndValue(CPLXMLNode *psParent, const(char) *pszName, const(char) *pszValue);
 CPLXMLNode * CPLCloneXMLTree(CPLXMLNode *psTree);
-int  CPLSetXMLValue(CPLXMLNode *psRoot, char *pszPath, char *pszValue);
-void  CPLStripXMLNamespace(CPLXMLNode *psRoot, char *pszNameSpace, int bRecurse);
+int  CPLSetXMLValue(CPLXMLNode *psRoot, const(char) *pszPath, const(char) *pszValue);
+void  CPLStripXMLNamespace(CPLXMLNode *psRoot, const(char) *pszNameSpace, int bRecurse);
 void  CPLCleanXMLElementName(char *);
 
-CPLXMLNode * CPLParseXMLFile(char *pszFilename);
-int  CPLSerializeXMLTreeToFile(CPLXMLNode *psTree, char *pszFilename);
+CPLXMLNode * CPLParseXMLFile(const(char) *pszFilename);
+int  CPLSerializeXMLTreeToFile(CPLXMLNode *psTree, const(char) *pszFilename);

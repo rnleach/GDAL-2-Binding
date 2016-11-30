@@ -30,7 +30,7 @@ module gdal.cpl.error;
  * DEALINGS IN THE SOFTWARE.
  ****************************************************************************/
 
- import core.stdc.stdarg : va_list;
+import core.stdc.stdarg : va_list;
 
 import gdal.cpl.port;
 
@@ -83,27 +83,27 @@ enum CPLE_AWSSignatureDoesNotMatch = 16;
 /* 100 - 299 reserved for GDAL */
 
 
-void  CPLError(CPLErr eErrClass, CPLErrorNum err_no, char *fmt,...);
-void  CPLErrorV(CPLErr , CPLErrorNum , char *, va_list );
-void  CPLEmergencyError(char *);
+void  CPLError(CPLErr eErrClass, CPLErrorNum err_no, const(char) *fmt,...);
+void  CPLErrorV(CPLErr , CPLErrorNum , const(char) *, va_list );
+void  CPLEmergencyError(const(char) *);
 
 extern (Windows):
 void  CPLErrorReset();
 CPLErrorNum  CPLGetLastErrorNo();
 CPLErr  CPLGetLastErrorType();
-char * CPLGetLastErrorMsg();
+const(char) * CPLGetLastErrorMsg();
 void * CPLGetErrorHandlerUserData();
 
 extern (C):
-void  CPLErrorSetState(CPLErr eErrClass, CPLErrorNum err_no, char *pszMsg);
+void  CPLErrorSetState(CPLErr eErrClass, CPLErrorNum err_no, const(char) *pszMsg);
 void  CPLCleanupErrorMutex();
 
-alias void  function(CPLErr , CPLErrorNum , char *)CPLErrorHandler;
+alias void  function(CPLErr , CPLErrorNum , const(char) *)CPLErrorHandler;
 
 extern (Windows):
-void  CPLLoggingErrorHandler(CPLErr , CPLErrorNum , char *);
-void  CPLDefaultErrorHandler(CPLErr , CPLErrorNum , char *);
-void  CPLQuietErrorHandler(CPLErr , CPLErrorNum , char *);
+void  CPLLoggingErrorHandler(CPLErr , CPLErrorNum , const(char) *);
+void  CPLDefaultErrorHandler(CPLErr , CPLErrorNum , const(char) *);
+void  CPLQuietErrorHandler(CPLErr , CPLErrorNum , const(char) *);
 
 extern (C):
 void  CPLTurnFailureIntoWarning(int bOn);
@@ -115,7 +115,7 @@ void  CPLPushErrorHandler(CPLErrorHandler );
 void  CPLPushErrorHandlerEx(CPLErrorHandler , void *);
 void  CPLSetCurrentErrorHandlerCatchDebug(int bCatchDebug);
 void  CPLPopErrorHandler();
-void  _CPLAssert(char *, char *, int );
+void  _CPLAssert(const(char) *, const(char) *, int );
 
 /*
  * Helper macros used for input parameters validation.

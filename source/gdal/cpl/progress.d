@@ -32,12 +32,12 @@ module gdal.cpl.progress;
 import gdal.cpl.port;
 
 extern (C):
-alias GDALProgressFunc = int function(double dfComplete, char *pszMessage, 
+alias GDALProgressFunc = int function(double dfComplete, const(char) *pszMessage, 
   void *pProgressArg);
 
 extern (Windows):
-int  GDALDummyProgress(double , char *, void *);
-int  GDALTermProgress(double , char *, void *);
-int  GDALScaledProgress(double , char *, void *);
+int  GDALDummyProgress(double , const(char) *, void *);
+int  GDALTermProgress(double , const(char) *, void *);
+int  GDALScaledProgress(double , const(char) *, void *);
 void * GDALCreateScaledProgress(double , double , GDALProgressFunc , void *);
 void  GDALDestroyScaledProgress(void *);
