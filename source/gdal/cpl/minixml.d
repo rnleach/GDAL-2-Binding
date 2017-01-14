@@ -114,22 +114,22 @@ struct CPLXMLNode
 }
 
 
-CPLXMLNode * CPLParseXMLString(const(char) *);
-void  CPLDestroyXMLNode(CPLXMLNode *);
-CPLXMLNode * CPLGetXMLNode(CPLXMLNode *poRoot, const(char) *pszPath);
-CPLXMLNode * CPLSearchXMLNode(CPLXMLNode *poRoot, const(char) *pszTarget);
-const(char) * CPLGetXMLValue(CPLXMLNode *poRoot, const(char) *pszPath, const(char) *pszDefault);
-CPLXMLNode * CPLCreateXMLNode(CPLXMLNode *poParent, CPLXMLNodeType eType, const(char) *pszText);
-char * CPLSerializeXMLTree(CPLXMLNode *psNode);
-void  CPLAddXMLChild(CPLXMLNode *psParent, CPLXMLNode *psChild);
-int  CPLRemoveXMLChild(CPLXMLNode *psParent, CPLXMLNode *psChild);
-void  CPLAddXMLSibling(CPLXMLNode *psOlderSibling, CPLXMLNode *psNewSibling);
-CPLXMLNode * CPLCreateXMLElementAndValue(CPLXMLNode *psParent, const(char) *pszName, const(char) *pszValue);
-void  CPLAddXMLAttributeAndValue(CPLXMLNode *psParent, const(char) *pszName, const(char) *pszValue);
-CPLXMLNode * CPLCloneXMLTree(CPLXMLNode *psTree);
-int  CPLSetXMLValue(CPLXMLNode *psRoot, const(char) *pszPath, const(char) *pszValue);
-void  CPLStripXMLNamespace(CPLXMLNode *psRoot, const(char) *pszNameSpace, int bRecurse);
-void  CPLCleanXMLElementName(char *);
+CPLXMLNode * CPLParseXMLString(const(char) *) nothrow @nogc;
+void  CPLDestroyXMLNode(CPLXMLNode *) nothrow @nogc;
+CPLXMLNode * CPLGetXMLNode(CPLXMLNode *poRoot, const(char) *pszPath) nothrow @nogc;
+CPLXMLNode * CPLSearchXMLNode(CPLXMLNode *poRoot, const(char) *pszTarget) nothrow @nogc;
+const(char) * CPLGetXMLValue(CPLXMLNode *poRoot, const(char) *pszPath, const(char) *pszDefault) nothrow @nogc;
+CPLXMLNode * CPLCreateXMLNode(CPLXMLNode *poParent, CPLXMLNodeType eType, const(char) *pszText) nothrow @nogc;
+char * CPLSerializeXMLTree(CPLXMLNode *psNode) nothrow @nogc;
+void  CPLAddXMLChild(CPLXMLNode *psParent, CPLXMLNode *psChild) nothrow @nogc;
+int  CPLRemoveXMLChild(CPLXMLNode *psParent, CPLXMLNode *psChild) nothrow @nogc;
+void  CPLAddXMLSibling(CPLXMLNode *psOlderSibling, CPLXMLNode *psNewSibling) nothrow @nogc;
+CPLXMLNode * CPLCreateXMLElementAndValue(CPLXMLNode *psParent, const(char) *pszName, const(char) *pszValue) nothrow @nogc;
+void  CPLAddXMLAttributeAndValue(CPLXMLNode *psParent, const(char) *pszName, const(char) *pszValue) nothrow @nogc;
+CPLXMLNode * CPLCloneXMLTree(CPLXMLNode *psTree) nothrow @nogc;
+int  CPLSetXMLValue(CPLXMLNode *psRoot, const(char) *pszPath, const(char) *pszValue) nothrow @nogc;
+void  CPLStripXMLNamespace(CPLXMLNode *psRoot, const(char) *pszNameSpace, int bRecurse) nothrow @nogc;
+void  CPLCleanXMLElementName(char *) nothrow @nogc;
 
-CPLXMLNode * CPLParseXMLFile(const(char) *pszFilename);
-int  CPLSerializeXMLTreeToFile(CPLXMLNode *psTree, const(char) *pszFilename);
+CPLXMLNode * CPLParseXMLFile(const(char) *pszFilename) nothrow @nogc;
+int  CPLSerializeXMLTreeToFile(CPLXMLNode *psTree, const(char) *pszFilename) nothrow @nogc;

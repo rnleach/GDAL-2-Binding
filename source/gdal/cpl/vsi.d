@@ -59,23 +59,23 @@ import core.stdc.stdio : FILE;
  */
 
 extern (C):
-FILE * VSIFOpen(const(char) *, const(char) *);
-int  VSIFClose(FILE *);
-int  VSIFSeek(FILE *, int , int );
-int  VSIFTell(FILE *);
-void  VSIRewind(FILE *);
-void  VSIFFlush(FILE *);
+FILE * VSIFOpen(const(char) *, const(char) *) nothrow @nogc;
+int  VSIFClose(FILE *) nothrow @nogc;
+int  VSIFSeek(FILE *, int , int ) nothrow @nogc;
+int  VSIFTell(FILE *) nothrow @nogc;
+void  VSIRewind(FILE *) nothrow @nogc;
+void  VSIFFlush(FILE *) nothrow @nogc;
 
-size_t  VSIFRead(void *, size_t , size_t , FILE *);
-size_t  VSIFWrite(void *, size_t , size_t , FILE *);
-char * VSIFGets(char *, int , FILE *);
-int  VSIFPuts(const(char) *, FILE *);
-int  VSIFPrintf(FILE *, const(char) *,...);
+size_t  VSIFRead(void *, size_t , size_t , FILE *) nothrow @nogc;
+size_t  VSIFWrite(void *, size_t , size_t , FILE *) nothrow @nogc;
+char * VSIFGets(char *, int , FILE *) nothrow @nogc;
+int  VSIFPuts(const(char) *, FILE *) nothrow @nogc;
+int  VSIFPrintf(FILE *, const(char) *,...) nothrow @nogc;
 
-int  VSIFGetc(FILE *);
-int  VSIFPutc(int , FILE *);
-int  VSIUngetc(int , FILE *);
-int  VSIFEof(FILE *);
+int  VSIFGetc(FILE *) nothrow @nogc;
+int  VSIFPutc(int , FILE *) nothrow @nogc;
+int  VSIUngetc(int , FILE *) nothrow @nogc;
+int  VSIFEof(FILE *) nothrow @nogc;
 
 /* ==================================================================== */
 /*      64bit stdio file access functions.  If we have a big size       */
@@ -87,32 +87,32 @@ alias GUIntBig vsi_l_offset;
 alias GUINTBIG_MAX VSI_L_OFFSET_MAX;
 alias FILE VSILFILE;
 
-VSILFILE * VSIFOpenL(const(char) *, const(char) *);
-VSILFILE * VSIFOpenExL(const(char) *, const(char) *, int );
-int  VSIFCloseL(VSILFILE *);
-int  VSIFSeekL(VSILFILE *, vsi_l_offset , int );
-vsi_l_offset  VSIFTellL(VSILFILE *);
-void  VSIRewindL(VSILFILE *);
-size_t  VSIFReadL(void *, size_t , size_t , VSILFILE *);
-int  VSIFReadMultiRangeL(int nRanges, void **ppData, vsi_l_offset *panOffsets, size_t *panSizes, VSILFILE *);
-size_t  VSIFWriteL(void *, size_t , size_t , VSILFILE *);
-int  VSIFEofL(VSILFILE *);
-int  VSIFTruncateL(VSILFILE *, vsi_l_offset );
-int  VSIFFlushL(VSILFILE *);
-int  VSIFPrintfL(VSILFILE *, const(char) *,...);
-int  VSIFPutcL(int , VSILFILE *);
+VSILFILE * VSIFOpenL(const(char) *, const(char) *) nothrow @nogc;
+VSILFILE * VSIFOpenExL(const(char) *, const(char) *, int ) nothrow @nogc;
+int  VSIFCloseL(VSILFILE *) nothrow @nogc;
+int  VSIFSeekL(VSILFILE *, vsi_l_offset , int ) nothrow @nogc;
+vsi_l_offset  VSIFTellL(VSILFILE *) nothrow @nogc;
+void  VSIRewindL(VSILFILE *) nothrow @nogc;
+size_t  VSIFReadL(void *, size_t , size_t , VSILFILE *) nothrow @nogc;
+int  VSIFReadMultiRangeL(int nRanges, void **ppData, vsi_l_offset *panOffsets, size_t *panSizes, VSILFILE *) nothrow @nogc;
+size_t  VSIFWriteL(void *, size_t , size_t , VSILFILE *) nothrow @nogc;
+int  VSIFEofL(VSILFILE *) nothrow @nogc;
+int  VSIFTruncateL(VSILFILE *, vsi_l_offset ) nothrow @nogc;
+int  VSIFFlushL(VSILFILE *) nothrow @nogc;
+int  VSIFPrintfL(VSILFILE *, const(char) *,...) nothrow @nogc;
+int  VSIFPutcL(int , VSILFILE *) nothrow @nogc;
 
-int  VSIIngestFile(VSILFILE *fp, const(char) *pszFilename, GByte **ppabyRet, vsi_l_offset *pnSize, GIntBig nMaxSize);
+int  VSIIngestFile(VSILFILE *fp, const(char) *pszFilename, GByte **ppabyRet, vsi_l_offset *pnSize, GIntBig nMaxSize) nothrow @nogc;
 
 /* ==================================================================== */
 /*      Memory allocation                                               */
 /* ==================================================================== */
 
-void * VSICalloc(size_t , size_t );
-void * VSIMalloc(size_t );
-void  VSIFree(void *);
-void * VSIRealloc(void *, size_t );
-char * VSIStrdup(const(char) *);
+void * VSICalloc(size_t , size_t ) nothrow @nogc;
+void * VSIMalloc(size_t ) nothrow @nogc;
+void  VSIFree(void *) nothrow @nogc;
+void * VSIRealloc(void *, size_t ) nothrow @nogc;
+char * VSIStrdup(const(char) *) nothrow @nogc;
 
 /**
  VSIMalloc2 allocates (nSize1 * nSize2) bytes.
@@ -121,7 +121,7 @@ char * VSIStrdup(const(char) *);
  If nSize1 == 0 || nSize2 == 0, a NULL pointer will also be returned.
  CPLFree() or VSIFree() can be used to free memory allocated by this function.
 */
-void * VSIMalloc2(size_t nSize1, size_t nSize2);
+void * VSIMalloc2(size_t nSize1, size_t nSize2) nothrow @nogc;
 
 /**
  VSIMalloc3 allocates (nSize1 * nSize2 * nSize3) bytes.
@@ -130,60 +130,60 @@ void * VSIMalloc2(size_t nSize1, size_t nSize2);
  If nSize1 == 0 || nSize2 == 0 || nSize3 == 0, a NULL pointer will also be returned.
  CPLFree() or VSIFree() can be used to free memory allocated by this function.
 */
-void * VSIMalloc3(size_t nSize1, size_t nSize2, size_t nSize3);
+void * VSIMalloc3(size_t nSize1, size_t nSize2, size_t nSize3) nothrow @nogc;
 
 void * VSIMallocVerbose(size_t nSize, const(char) *pszFile, int nLine);
-void * VSIMalloc2Verbose(size_t nSize1, size_t nSize2, const(char) *pszFile, int nLine);
+void * VSIMalloc2Verbose(size_t nSize1, size_t nSize2, const(char) *pszFile, int nLine) nothrow @nogc;
 
-void * VSIMalloc3Verbose(size_t nSize1, size_t nSize2, size_t nSize3, const(char) *pszFile, int nLine);
+void * VSIMalloc3Verbose(size_t nSize1, size_t nSize2, size_t nSize3, const(char) *pszFile, int nLine) nothrow @nogc;
 
-void * VSICallocVerbose(size_t nCount, size_t nSize, const(char) *pszFile, int nLine);
+void * VSICallocVerbose(size_t nCount, size_t nSize, const(char) *pszFile, int nLine) nothrow @nogc;
 
-void * VSIReallocVerbose(void *pOldPtr, size_t nNewSize, const(char) *pszFile, int nLine);
+void * VSIReallocVerbose(void *pOldPtr, size_t nNewSize, const(char) *pszFile, int nLine) nothrow @nogc;
 
-char * VSIStrdupVerbose(const(char) *pszStr, const(char) *pszFile, int nLine);
+char * VSIStrdupVerbose(const(char) *pszStr, const(char) *pszFile, int nLine) nothrow @nogc;
 
 
-GIntBig  CPLGetPhysicalRAM();
-GIntBig  CPLGetUsablePhysicalRAM();
+GIntBig  CPLGetPhysicalRAM() nothrow @nogc;
+GIntBig  CPLGetUsablePhysicalRAM() nothrow @nogc;
 
 /* ==================================================================== */
 /*      Other...                                                        */
 /* ==================================================================== */
 
 alias VSIReadDir CPLReadDir;
-char ** VSIReadDir(const(char) *);
-char ** VSIReadDirRecursive(const(char) *pszPath);
-char ** VSIReadDirEx(const(char) *pszPath, int nMaxFiles);
-int  VSIMkdir(const(char) *pathname, int mode);
-int  VSIRmdir(const(char) *pathname);
-int  VSIUnlink(const(char) *pathname);
-int  VSIRename(const(char) *oldpath, const(char) *newpath);
-char * VSIStrerror(int );
-GIntBig  VSIGetDiskFreeSpace(const(char) *pszDirname);
+char ** VSIReadDir(const(char) *) nothrow @nogc;
+char ** VSIReadDirRecursive(const(char) *pszPath) nothrow @nogc;
+char ** VSIReadDirEx(const(char) *pszPath, int nMaxFiles) nothrow @nogc;
+int  VSIMkdir(const(char) *pathname, int mode) nothrow @nogc;
+int  VSIRmdir(const(char) *pathname) nothrow @nogc;
+int  VSIUnlink(const(char) *pathname) nothrow @nogc;
+int  VSIRename(const(char) *oldpath, const(char) *newpath) nothrow @nogc;
+char * VSIStrerror(int ) nothrow @nogc;
+GIntBig  VSIGetDiskFreeSpace(const(char) *pszDirname) nothrow @nogc;
 
 /* ==================================================================== */
 /*      Install special file access handlers.                           */
 /* ==================================================================== */
-void  VSIInstallMemFileHandler();
-void  VSIInstallLargeFileHandler();
-void  VSIInstallSubFileHandler();
-void  VSIInstallCurlFileHandler();
-void  VSIInstallCurlStreamingFileHandler();
-void  VSIInstallS3FileHandler();
-void  VSIInstallS3StreamingFileHandler();
-void  VSIInstallGZipFileHandler();
-void  VSIInstallZipFileHandler();
-void  VSIInstallStdinHandler();
-void  VSIInstallStdoutHandler();
-void  VSIInstallSparseFileHandler();
-void  VSIInstallTarFileHandler();
-void  VSIInstallCryptFileHandler();
-void  VSISetCryptKey(GByte *pabyKey, int nKeySize);
-void  VSICleanupFileManager();
+void  VSIInstallMemFileHandler() nothrow @nogc;
+void  VSIInstallLargeFileHandler() nothrow @nogc;
+void  VSIInstallSubFileHandler() nothrow @nogc;
+void  VSIInstallCurlFileHandler() nothrow @nogc;
+void  VSIInstallCurlStreamingFileHandler() nothrow @nogc;
+void  VSIInstallS3FileHandler() nothrow @nogc;
+void  VSIInstallS3StreamingFileHandler() nothrow @nogc;
+void  VSIInstallGZipFileHandler() nothrow @nogc;
+void  VSIInstallZipFileHandler() nothrow @nogc;
+void  VSIInstallStdinHandler() nothrow @nogc;
+void  VSIInstallStdoutHandler() nothrow @nogc;
+void  VSIInstallSparseFileHandler() nothrow @nogc;
+void  VSIInstallTarFileHandler() nothrow @nogc;
+void  VSIInstallCryptFileHandler() nothrow @nogc;
+void  VSISetCryptKey(GByte *pabyKey, int nKeySize) nothrow @nogc;
+void  VSICleanupFileManager() nothrow @nogc;
 
-VSILFILE * VSIFileFromMemBuffer(const(char *)pszFilename, GByte *pabyData, vsi_l_offset nDataLength, int bTakeOwnership);
-GByte * VSIGetMemFileBuffer(const(char) *pszFilename, vsi_l_offset *pnDataLength, int bUnlinkAndSeize);
+VSILFILE * VSIFileFromMemBuffer(const(char *)pszFilename, GByte *pabyData, vsi_l_offset nDataLength, int bTakeOwnership) nothrow @nogc;
+GByte * VSIGetMemFileBuffer(const(char) *pszFilename, vsi_l_offset *pnDataLength, int bUnlinkAndSeize) nothrow @nogc;
 
 alias size_t  function(void *ptr, size_t size, size_t nmemb, FILE *stream)VSIWriteFunction;
-void  VSIStdoutSetRedirection(VSIWriteFunction pFct, FILE *stream);
+void  VSIStdoutSetRedirection(VSIWriteFunction pFct, FILE *stream) nothrow @nogc;

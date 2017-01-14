@@ -12,7 +12,7 @@ enum uint GDAL_VERSION_BUILD = 0;
 
 /* GDAL_COMPUTE_VERSION macro introduced in GDAL 1.10 */
 /* Must be used ONLY to compare with version numbers for GDAL >= 1.10 */
-uint GDAL_COMPUTE_VERSION(uint maj, uint min, uint rev) 
+uint GDAL_COMPUTE_VERSION(uint maj, uint min, uint rev) pure nothrow @nogc
 {
   return maj * 1000000 + min * 10000 + rev * 100;
 }

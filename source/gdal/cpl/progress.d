@@ -33,11 +33,11 @@ import gdal.cpl.port;
 
 extern (C):
 alias GDALProgressFunc = int function(double dfComplete, const(char) *pszMessage, 
-  void *pProgressArg);
+  void *pProgressArg) nothrow @nogc;
 
-extern (Windows):
-int  GDALDummyProgress(double , const(char) *, void *);
-int  GDALTermProgress(double , const(char) *, void *);
-int  GDALScaledProgress(double , const(char) *, void *);
-void * GDALCreateScaledProgress(double , double , GDALProgressFunc , void *);
-void  GDALDestroyScaledProgress(void *);
+extern (System):
+int  GDALDummyProgress(double , const(char) *, void *) nothrow @nogc;
+int  GDALTermProgress(double , const(char) *, void *) nothrow @nogc;
+int  GDALScaledProgress(double , const(char) *, void *) nothrow @nogc;
+void * GDALCreateScaledProgress(double , double , GDALProgressFunc , void *) nothrow @nogc;
+void  GDALDestroyScaledProgress(void *) nothrow @nogc;

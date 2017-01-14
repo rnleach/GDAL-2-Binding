@@ -55,7 +55,7 @@ enum
 extern (C):
 alias int OGRAxisOrientation;
 
-const(char)* OSRAxisEnumToName(OGRAxisOrientation eOrientation);
+const(char)* OSRAxisEnumToName(OGRAxisOrientation eOrientation) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Datum types (corresponds to CS_DatumType).                      */
@@ -274,232 +274,232 @@ enum SRS_WGS84_INVFLATTENING = 298.257223563;
 alias void *OGRSpatialReferenceH;
 alias void *OGRCoordinateTransformationH;
 
-extern (Windows):
-OGRSpatialReferenceH  OSRNewSpatialReference(const(char) *);
-OGRSpatialReferenceH  OSRCloneGeogCS(OGRSpatialReferenceH );
-OGRSpatialReferenceH  OSRClone(OGRSpatialReferenceH );
-void  OSRDestroySpatialReference(OGRSpatialReferenceH );
+extern (System):
+OGRSpatialReferenceH  OSRNewSpatialReference(const(char) *) nothrow @nogc;
+OGRSpatialReferenceH  OSRCloneGeogCS(OGRSpatialReferenceH ) nothrow @nogc;
+OGRSpatialReferenceH  OSRClone(OGRSpatialReferenceH ) nothrow @nogc;
+void  OSRDestroySpatialReference(OGRSpatialReferenceH ) nothrow @nogc;
 
 extern (C):
-int  OSRReference(OGRSpatialReferenceH );
-int  OSRDereference(OGRSpatialReferenceH );
-void  OSRRelease(OGRSpatialReferenceH );
+int  OSRReference(OGRSpatialReferenceH ) nothrow @nogc;
+int  OSRDereference(OGRSpatialReferenceH ) nothrow @nogc;
+void  OSRRelease(OGRSpatialReferenceH ) nothrow @nogc;
 
-OGRErr  OSRValidate(OGRSpatialReferenceH );
-OGRErr  OSRFixupOrdering(OGRSpatialReferenceH );
-OGRErr  OSRFixup(OGRSpatialReferenceH );
-OGRErr  OSRStripCTParms(OGRSpatialReferenceH );
+OGRErr  OSRValidate(OGRSpatialReferenceH ) nothrow @nogc;
+OGRErr  OSRFixupOrdering(OGRSpatialReferenceH ) nothrow @nogc;
+OGRErr  OSRFixup(OGRSpatialReferenceH ) nothrow @nogc;
+OGRErr  OSRStripCTParms(OGRSpatialReferenceH ) nothrow @nogc;
 
-extern (Windows):
-OGRErr  OSRImportFromEPSG(OGRSpatialReferenceH , int );
-OGRErr  OSRImportFromEPSGA(OGRSpatialReferenceH , int );
+extern (System):
+OGRErr  OSRImportFromEPSG(OGRSpatialReferenceH , int ) nothrow @nogc;
+OGRErr  OSRImportFromEPSGA(OGRSpatialReferenceH , int ) nothrow @nogc;
 extern (C):
-OGRErr  OSRImportFromWkt(OGRSpatialReferenceH , char **);
-OGRErr  OSRImportFromProj4(OGRSpatialReferenceH , const(char) *);
-OGRErr  OSRImportFromESRI(OGRSpatialReferenceH , char **);
-OGRErr  OSRImportFromPCI(OGRSpatialReferenceH hSRS, char *, char *, double *);
-OGRErr  OSRImportFromUSGS(OGRSpatialReferenceH , int , int , double *, int );
-OGRErr  OSRImportFromXML(OGRSpatialReferenceH , char *);
-OGRErr  OSRImportFromDict(OGRSpatialReferenceH , char *, char *);
-OGRErr  OSRImportFromPanorama(OGRSpatialReferenceH , int , int , int , double *);
-OGRErr  OSRImportFromOzi(OGRSpatialReferenceH , const(char*)*);
-OGRErr  OSRImportFromMICoordSys(OGRSpatialReferenceH , const(char) *);
-OGRErr  OSRImportFromERM(OGRSpatialReferenceH , const(char) *, const(char) *, const(char) *);
-OGRErr  OSRImportFromUrl(OGRSpatialReferenceH , char *);
+OGRErr  OSRImportFromWkt(OGRSpatialReferenceH , char **) nothrow @nogc;
+OGRErr  OSRImportFromProj4(OGRSpatialReferenceH , const(char) *) nothrow @nogc;
+OGRErr  OSRImportFromESRI(OGRSpatialReferenceH , char **) nothrow @nogc;
+OGRErr  OSRImportFromPCI(OGRSpatialReferenceH hSRS, char *, char *, double *) nothrow @nogc;
+OGRErr  OSRImportFromUSGS(OGRSpatialReferenceH , int , int , double *, int ) nothrow @nogc;
+OGRErr  OSRImportFromXML(OGRSpatialReferenceH , char *) nothrow @nogc;
+OGRErr  OSRImportFromDict(OGRSpatialReferenceH , char *, char *) nothrow @nogc;
+OGRErr  OSRImportFromPanorama(OGRSpatialReferenceH , int , int , int , double *) nothrow @nogc;
+OGRErr  OSRImportFromOzi(OGRSpatialReferenceH , const(char*)*) nothrow @nogc;
+OGRErr  OSRImportFromMICoordSys(OGRSpatialReferenceH , const(char) *) nothrow @nogc;
+OGRErr  OSRImportFromERM(OGRSpatialReferenceH , const(char) *, const(char) *, const(char) *) nothrow @nogc;
+OGRErr  OSRImportFromUrl(OGRSpatialReferenceH , char *) nothrow @nogc;
 
-extern (Windows):
-OGRErr  OSRExportToWkt(OGRSpatialReferenceH , char **);
-OGRErr  OSRExportToPrettyWkt(OGRSpatialReferenceH , char **, int );
-OGRErr  OSRExportToProj4(OGRSpatialReferenceH , char **);
+extern (System):
+OGRErr  OSRExportToWkt(OGRSpatialReferenceH , char **) nothrow @nogc;
+OGRErr  OSRExportToPrettyWkt(OGRSpatialReferenceH , char **, int ) nothrow @nogc;
+OGRErr  OSRExportToProj4(OGRSpatialReferenceH , char **) nothrow @nogc;
 extern (C):
-OGRErr  OSRExportToPCI(OGRSpatialReferenceH , char **, char **, double **);
-OGRErr  OSRExportToUSGS(OGRSpatialReferenceH , int *, int *, double **, int *);
-OGRErr  OSRExportToXML(OGRSpatialReferenceH , char **, const(char) *);
-OGRErr  OSRExportToPanorama(OGRSpatialReferenceH , int *, int *, int *, int *, double *);
-OGRErr  OSRExportToMICoordSys(OGRSpatialReferenceH , char **);
-OGRErr  OSRExportToERM(OGRSpatialReferenceH , char *, char *, char *);
+OGRErr  OSRExportToPCI(OGRSpatialReferenceH , char **, char **, double **) nothrow @nogc;
+OGRErr  OSRExportToUSGS(OGRSpatialReferenceH , int *, int *, double **, int *) nothrow @nogc;
+OGRErr  OSRExportToXML(OGRSpatialReferenceH , char **, const(char) *) nothrow @nogc;
+OGRErr  OSRExportToPanorama(OGRSpatialReferenceH , int *, int *, int *, int *, double *) nothrow @nogc;
+OGRErr  OSRExportToMICoordSys(OGRSpatialReferenceH , char **) nothrow @nogc;
+OGRErr  OSRExportToERM(OGRSpatialReferenceH , char *, char *, char *) nothrow @nogc;
 
-OGRErr  OSRMorphToESRI(OGRSpatialReferenceH );
-OGRErr  OSRMorphFromESRI(OGRSpatialReferenceH );
+OGRErr  OSRMorphToESRI(OGRSpatialReferenceH ) nothrow @nogc;
+OGRErr  OSRMorphFromESRI(OGRSpatialReferenceH ) nothrow @nogc;
 
-extern (Windows):
-OGRErr  OSRSetAttrValue(OGRSpatialReferenceH hSRS, const(char) *pszNodePath, const(char) *pszNewNodeValue);
-char * OSRGetAttrValue(OGRSpatialReferenceH hSRS, const(char) *pszName, int iChild);
+extern (System):
+OGRErr  OSRSetAttrValue(OGRSpatialReferenceH hSRS, const(char) *pszNodePath, const(char) *pszNewNodeValue) nothrow @nogc;
+char * OSRGetAttrValue(OGRSpatialReferenceH hSRS, const(char) *pszName, int iChild) nothrow @nogc;
 
 extern (C):
-OGRErr  OSRSetAngularUnits(OGRSpatialReferenceH , const(char) *, double );
-double  OSRGetAngularUnits(OGRSpatialReferenceH , char **);
-OGRErr  OSRSetLinearUnits(OGRSpatialReferenceH , const(char) *, double );
-OGRErr  OSRSetTargetLinearUnits(OGRSpatialReferenceH , const(char) *, const(char) *, double );
-OGRErr  OSRSetLinearUnitsAndUpdateParameters(OGRSpatialReferenceH , const(char) *, double );
-double  OSRGetLinearUnits(OGRSpatialReferenceH , char **);
-double  OSRGetTargetLinearUnits(OGRSpatialReferenceH , char *, char **);
+OGRErr  OSRSetAngularUnits(OGRSpatialReferenceH , const(char) *, double ) nothrow @nogc;
+double  OSRGetAngularUnits(OGRSpatialReferenceH , char **) nothrow @nogc;
+OGRErr  OSRSetLinearUnits(OGRSpatialReferenceH , const(char) *, double ) nothrow @nogc;
+OGRErr  OSRSetTargetLinearUnits(OGRSpatialReferenceH , const(char) *, const(char) *, double ) nothrow @nogc;
+OGRErr  OSRSetLinearUnitsAndUpdateParameters(OGRSpatialReferenceH , const(char) *, double ) nothrow @nogc;
+double  OSRGetLinearUnits(OGRSpatialReferenceH , char **) nothrow @nogc;
+double  OSRGetTargetLinearUnits(OGRSpatialReferenceH , char *, char **) nothrow @nogc;
 
-double  OSRGetPrimeMeridian(OGRSpatialReferenceH , char **);
+double  OSRGetPrimeMeridian(OGRSpatialReferenceH , char **) nothrow @nogc;
 
-int  OSRIsGeographic(OGRSpatialReferenceH );
-int  OSRIsLocal(OGRSpatialReferenceH );
-int  OSRIsProjected(OGRSpatialReferenceH );
-int  OSRIsCompound(OGRSpatialReferenceH );
-int  OSRIsGeocentric(OGRSpatialReferenceH );
-int  OSRIsVertical(OGRSpatialReferenceH );
-int  OSRIsSameGeogCS(OGRSpatialReferenceH , OGRSpatialReferenceH );
-int  OSRIsSameVertCS(OGRSpatialReferenceH , OGRSpatialReferenceH );
-int  OSRIsSame(OGRSpatialReferenceH , OGRSpatialReferenceH );
+int  OSRIsGeographic(OGRSpatialReferenceH ) nothrow @nogc;
+int  OSRIsLocal(OGRSpatialReferenceH ) nothrow @nogc;
+int  OSRIsProjected(OGRSpatialReferenceH ) nothrow @nogc;
+int  OSRIsCompound(OGRSpatialReferenceH ) nothrow @nogc;
+int  OSRIsGeocentric(OGRSpatialReferenceH ) nothrow @nogc;
+int  OSRIsVertical(OGRSpatialReferenceH ) nothrow @nogc;
+int  OSRIsSameGeogCS(OGRSpatialReferenceH , OGRSpatialReferenceH ) nothrow @nogc;
+int  OSRIsSameVertCS(OGRSpatialReferenceH , OGRSpatialReferenceH ) nothrow @nogc;
+int  OSRIsSame(OGRSpatialReferenceH , OGRSpatialReferenceH ) nothrow @nogc;
 
-OGRErr  OSRSetLocalCS(OGRSpatialReferenceH hSRS, const(char) *pszName);
-OGRErr  OSRSetProjCS(OGRSpatialReferenceH hSRS, const(char) *pszName);
-OGRErr  OSRSetGeocCS(OGRSpatialReferenceH hSRS, const(char) *pszName);
-OGRErr  OSRSetWellKnownGeogCS(OGRSpatialReferenceH hSRS, const(char) *pszName);
-extern (Windows):
-OGRErr  OSRSetFromUserInput(OGRSpatialReferenceH hSRS, const(char) *);
+OGRErr  OSRSetLocalCS(OGRSpatialReferenceH hSRS, const(char) *pszName) nothrow @nogc;
+OGRErr  OSRSetProjCS(OGRSpatialReferenceH hSRS, const(char) *pszName) nothrow @nogc;
+OGRErr  OSRSetGeocCS(OGRSpatialReferenceH hSRS, const(char) *pszName) nothrow @nogc;
+OGRErr  OSRSetWellKnownGeogCS(OGRSpatialReferenceH hSRS, const(char) *pszName) nothrow @nogc;
+extern (System):
+OGRErr  OSRSetFromUserInput(OGRSpatialReferenceH hSRS, const(char) *) nothrow @nogc;
 extern (C):
-OGRErr  OSRCopyGeogCSFrom(OGRSpatialReferenceH hSRS, OGRSpatialReferenceH hSrcSRS);
-OGRErr  OSRSetTOWGS84(OGRSpatialReferenceH hSRS, double , double , double , double , double , double , double );
-OGRErr  OSRGetTOWGS84(OGRSpatialReferenceH hSRS, double *, int );
+OGRErr  OSRCopyGeogCSFrom(OGRSpatialReferenceH hSRS, OGRSpatialReferenceH hSrcSRS) nothrow @nogc;
+OGRErr  OSRSetTOWGS84(OGRSpatialReferenceH hSRS, double , double , double , double , double , double , double ) nothrow @nogc;
+OGRErr  OSRGetTOWGS84(OGRSpatialReferenceH hSRS, double *, int ) nothrow @nogc;
 
-OGRErr  OSRSetCompoundCS(OGRSpatialReferenceH hSRS, const(char) *pszName, OGRSpatialReferenceH hHorizSRS, OGRSpatialReferenceH hVertSRS);
-OGRErr  OSRSetGeogCS(OGRSpatialReferenceH hSRS, const(char) *pszGeogName, const(char) *pszDatumName, const(char) *pszEllipsoidName, double dfSemiMajor, double dfInvFlattening, const(char) *pszPMName, double dfPMOffset, const(char) *pszUnits, double dfConvertToRadians);
+OGRErr  OSRSetCompoundCS(OGRSpatialReferenceH hSRS, const(char) *pszName, OGRSpatialReferenceH hHorizSRS, OGRSpatialReferenceH hVertSRS) nothrow @nogc;
+OGRErr  OSRSetGeogCS(OGRSpatialReferenceH hSRS, const(char) *pszGeogName, const(char) *pszDatumName, const(char) *pszEllipsoidName, double dfSemiMajor, double dfInvFlattening, const(char) *pszPMName, double dfPMOffset, const(char) *pszUnits, double dfConvertToRadians) nothrow @nogc;
 
-OGRErr  OSRSetVertCS(OGRSpatialReferenceH hSRS, const(char) *pszVertCSName, const(char) *pszVertDatumName, int nVertDatumType);
+OGRErr  OSRSetVertCS(OGRSpatialReferenceH hSRS, const(char) *pszVertCSName, const(char) *pszVertDatumName, int nVertDatumType) nothrow @nogc;
 
-double  OSRGetSemiMajor(OGRSpatialReferenceH , OGRErr *);
-double  OSRGetSemiMinor(OGRSpatialReferenceH , OGRErr *);
-double  OSRGetInvFlattening(OGRSpatialReferenceH , OGRErr *);
+double  OSRGetSemiMajor(OGRSpatialReferenceH , OGRErr *) nothrow @nogc;
+double  OSRGetSemiMinor(OGRSpatialReferenceH , OGRErr *) nothrow @nogc;
+double  OSRGetInvFlattening(OGRSpatialReferenceH , OGRErr *) nothrow @nogc;
 
-OGRErr  OSRSetAuthority(OGRSpatialReferenceH hSRS, const(char) *pszTargetKey, const(char) *pszAuthority, int nCode);
-char * OSRGetAuthorityCode(OGRSpatialReferenceH hSRS, const(char) *pszTargetKey);
-char * OSRGetAuthorityName(OGRSpatialReferenceH hSRS, const(char) *pszTargetKey);
-OGRErr  OSRSetProjection(OGRSpatialReferenceH , const(char) *);
-OGRErr  OSRSetProjParm(OGRSpatialReferenceH , const(char) *, double );
-double  OSRGetProjParm(OGRSpatialReferenceH hSRS, const(char) *pszParmName, double dfDefault, OGRErr *);
-OGRErr  OSRSetNormProjParm(OGRSpatialReferenceH , const(char) *, double );
-double  OSRGetNormProjParm(OGRSpatialReferenceH hSRS, const(char) *pszParmName, double dfDefault, OGRErr *);
+OGRErr  OSRSetAuthority(OGRSpatialReferenceH hSRS, const(char) *pszTargetKey, const(char) *pszAuthority, int nCode) nothrow @nogc;
+char * OSRGetAuthorityCode(OGRSpatialReferenceH hSRS, const(char) *pszTargetKey) nothrow @nogc;
+char * OSRGetAuthorityName(OGRSpatialReferenceH hSRS, const(char) *pszTargetKey) nothrow @nogc;
+OGRErr  OSRSetProjection(OGRSpatialReferenceH , const(char) *) nothrow @nogc;
+OGRErr  OSRSetProjParm(OGRSpatialReferenceH , const(char) *, double ) nothrow @nogc;
+double  OSRGetProjParm(OGRSpatialReferenceH hSRS, const(char) *pszParmName, double dfDefault, OGRErr *) nothrow @nogc;
+OGRErr  OSRSetNormProjParm(OGRSpatialReferenceH , const(char) *, double ) nothrow @nogc;
+double  OSRGetNormProjParm(OGRSpatialReferenceH hSRS, const(char) *pszParmName, double dfDefault, OGRErr *) nothrow @nogc;
 
-OGRErr  OSRSetUTM(OGRSpatialReferenceH hSRS, int nZone, int bNorth);
-int  OSRGetUTMZone(OGRSpatialReferenceH hSRS, int *pbNorth);
-OGRErr  OSRSetStatePlane(OGRSpatialReferenceH hSRS, int nZone, int bNAD83);
-OGRErr  OSRSetStatePlaneWithUnits(OGRSpatialReferenceH hSRS, int nZone, int bNAD83, const(char) *pszOverrideUnitName, double dfOverrideUnit);
-OGRErr  OSRAutoIdentifyEPSG(OGRSpatialReferenceH hSRS);
+OGRErr  OSRSetUTM(OGRSpatialReferenceH hSRS, int nZone, int bNorth) nothrow @nogc;
+int  OSRGetUTMZone(OGRSpatialReferenceH hSRS, int *pbNorth) nothrow @nogc;
+OGRErr  OSRSetStatePlane(OGRSpatialReferenceH hSRS, int nZone, int bNAD83) nothrow @nogc;
+OGRErr  OSRSetStatePlaneWithUnits(OGRSpatialReferenceH hSRS, int nZone, int bNAD83, const(char) *pszOverrideUnitName, double dfOverrideUnit) nothrow @nogc;
+OGRErr  OSRAutoIdentifyEPSG(OGRSpatialReferenceH hSRS) nothrow @nogc;
 
-int  OSREPSGTreatsAsLatLong(OGRSpatialReferenceH hSRS);
-int  OSREPSGTreatsAsNorthingEasting(OGRSpatialReferenceH hSRS);
-const(char) * OSRGetAxis(OGRSpatialReferenceH hSRS, const(char) *pszTargetKey, int iAxis, OGRAxisOrientation *peOrientation);
-OGRErr  OSRSetAxes(OGRSpatialReferenceH hSRS, const(char) *pszTargetKey, const(char) *pszXAxisName, OGRAxisOrientation eXAxisOrientation, const(char) *pszYAxisName, OGRAxisOrientation eYAxisOrientation);
+int  OSREPSGTreatsAsLatLong(OGRSpatialReferenceH hSRS) nothrow @nogc;
+int  OSREPSGTreatsAsNorthingEasting(OGRSpatialReferenceH hSRS) nothrow @nogc;
+const(char) * OSRGetAxis(OGRSpatialReferenceH hSRS, const(char) *pszTargetKey, int iAxis, OGRAxisOrientation *peOrientation) nothrow @nogc;
+OGRErr  OSRSetAxes(OGRSpatialReferenceH hSRS, const(char) *pszTargetKey, const(char) *pszXAxisName, OGRAxisOrientation eXAxisOrientation, const(char) *pszYAxisName, OGRAxisOrientation eYAxisOrientation) nothrow @nogc;
 /** Albers Conic Equal Area */
-OGRErr  OSRSetACEA(OGRSpatialReferenceH hSRS, double dfStdP1, double dfStdP2, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetACEA(OGRSpatialReferenceH hSRS, double dfStdP1, double dfStdP2, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Azimuthal Equidistant */
-OGRErr  OSRSetAE(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetAE(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Bonne */
-OGRErr  OSRSetBonne(OGRSpatialReferenceH hSRS, double dfStandardParallel, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetBonne(OGRSpatialReferenceH hSRS, double dfStandardParallel, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Cylindrical Equal Area */
-OGRErr  OSRSetCEA(OGRSpatialReferenceH hSRS, double dfStdP1, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetCEA(OGRSpatialReferenceH hSRS, double dfStdP1, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
-OGRErr  OSRSetCS(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetCS(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Equidistant Conic */
-OGRErr  OSRSetEC(OGRSpatialReferenceH hSRS, double dfStdP1, double dfStdP2, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetEC(OGRSpatialReferenceH hSRS, double dfStdP1, double dfStdP2, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Eckert I-VI */
-OGRErr  OSRSetEckert(OGRSpatialReferenceH hSRS, int nVariation, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetEckert(OGRSpatialReferenceH hSRS, int nVariation, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Eckert IV */
-OGRErr  OSRSetEckertIV(OGRSpatialReferenceH hSRS, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetEckertIV(OGRSpatialReferenceH hSRS, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Eckert VI */
-OGRErr  OSRSetEckertVI(OGRSpatialReferenceH hSRS, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetEckertVI(OGRSpatialReferenceH hSRS, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Equirectangular */
-OGRErr  OSRSetEquirectangular(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetEquirectangular(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Equirectangular generalized form */
-OGRErr  OSRSetEquirectangular2(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfPseudoStdParallel1, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetEquirectangular2(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfPseudoStdParallel1, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Gall Stereograpic */
-OGRErr  OSRSetGS(OGRSpatialReferenceH hSRS, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetGS(OGRSpatialReferenceH hSRS, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Goode Homolosine */
-OGRErr  OSRSetGH(OGRSpatialReferenceH hSRS, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetGH(OGRSpatialReferenceH hSRS, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Interrupted Goode Homolosine */
-OGRErr  OSRSetIGH(OGRSpatialReferenceH hSRS);
+OGRErr  OSRSetIGH(OGRSpatialReferenceH hSRS) nothrow @nogc;
 
 /** GEOS - Geostationary Satellite View */
-OGRErr  OSRSetGEOS(OGRSpatialReferenceH hSRS, double dfCentralMeridian, double dfSatelliteHeight, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetGEOS(OGRSpatialReferenceH hSRS, double dfCentralMeridian, double dfSatelliteHeight, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Gauss Schreiber Transverse Mercator */
-OGRErr  OSRSetGaussSchreiberTMercator(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetGaussSchreiberTMercator(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 /** Gnomonic */
-OGRErr  OSRSetGnomonic(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetGnomonic(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Oblique Mercator (aka HOM (variant B) */
-OGRErr  OSRSetOM(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfAzimuth, double dfRectToSkew, double dfScale, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetOM(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfAzimuth, double dfRectToSkew, double dfScale, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Hotine Oblique Mercator using azimuth angle */
-OGRErr  OSRSetHOM(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfAzimuth, double dfRectToSkew, double dfScale, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetHOM(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfAzimuth, double dfRectToSkew, double dfScale, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
-OGRErr  OSRSetHOMAC(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfAzimuth, double dfRectToSkew, double dfScale, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetHOMAC(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfAzimuth, double dfRectToSkew, double dfScale, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Hotine Oblique Mercator using two points on centerline */
-OGRErr  OSRSetHOM2PNO(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfLat1, double dfLong1, double dfLat2, double dfLong2, double dfScale, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetHOM2PNO(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfLat1, double dfLong1, double dfLat2, double dfLong2, double dfScale, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** International Map of the World Polyconic */
-OGRErr  OSRSetIWMPolyconic(OGRSpatialReferenceH hSRS, double dfLat1, double dfLat2, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetIWMPolyconic(OGRSpatialReferenceH hSRS, double dfLat1, double dfLat2, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Krovak Oblique Conic Conformal */
-OGRErr  OSRSetKrovak(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfAzimuth, double dfPseudoStdParallelLat, double dfScale, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetKrovak(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfAzimuth, double dfPseudoStdParallelLat, double dfScale, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Lambert Azimuthal Equal-Area */
-OGRErr  OSRSetLAEA(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetLAEA(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Lambert Conformal Conic */
-OGRErr  OSRSetLCC(OGRSpatialReferenceH hSRS, double dfStdP1, double dfStdP2, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetLCC(OGRSpatialReferenceH hSRS, double dfStdP1, double dfStdP2, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Lambert Conformal Conic 1SP */
-OGRErr  OSRSetLCC1SP(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetLCC1SP(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Lambert Conformal Conic (Belgium) */
-OGRErr  OSRSetLCCB(OGRSpatialReferenceH hSRS, double dfStdP1, double dfStdP2, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetLCCB(OGRSpatialReferenceH hSRS, double dfStdP1, double dfStdP2, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Miller Cylindrical */
-OGRErr  OSRSetMC(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetMC(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Mercator */
-OGRErr  OSRSetMercator(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing);
-OGRErr  OSRSetMercator2SP(OGRSpatialReferenceH hSRS, double dfStdP1, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetMercator(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
+OGRErr  OSRSetMercator2SP(OGRSpatialReferenceH hSRS, double dfStdP1, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Mollweide */
-OGRErr  OSRSetMollweide(OGRSpatialReferenceH hSRS, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetMollweide(OGRSpatialReferenceH hSRS, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** New Zealand Map Grid */
-OGRErr  OSRSetNZMG(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetNZMG(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Oblique Stereographic */
-OGRErr  OSRSetOS(OGRSpatialReferenceH hSRS, double dfOriginLat, double dfCMeridian, double dfScale, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetOS(OGRSpatialReferenceH hSRS, double dfOriginLat, double dfCMeridian, double dfScale, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Orthographic */
-OGRErr  OSRSetOrthographic(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetOrthographic(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Polyconic */
-OGRErr  OSRSetPolyconic(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetPolyconic(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Polar Stereographic */
-OGRErr  OSRSetPS(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetPS(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Robinson */
-OGRErr  OSRSetRobinson(OGRSpatialReferenceH hSRS, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetRobinson(OGRSpatialReferenceH hSRS, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Sinusoidal */
-OGRErr  OSRSetSinusoidal(OGRSpatialReferenceH hSRS, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetSinusoidal(OGRSpatialReferenceH hSRS, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Stereographic */
-OGRErr  OSRSetStereographic(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetStereographic(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Swiss Oblique Cylindrical */
-OGRErr  OSRSetSOC(OGRSpatialReferenceH hSRS, double dfLatitudeOfOrigin, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetSOC(OGRSpatialReferenceH hSRS, double dfLatitudeOfOrigin, double dfCentralMeridian, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Transverse Mercator
  *
@@ -507,58 +507,58 @@ OGRErr  OSRSetSOC(OGRSpatialReferenceH hSRS, double dfLatitudeOfOrigin, double d
  * see OGRSpatialReference::exportToProj4().
  */
 
-OGRErr  OSRSetTM(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetTM(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Transverse Mercator variant */
-OGRErr  OSRSetTMVariant(OGRSpatialReferenceH hSRS, const(char) *pszVariantName, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetTMVariant(OGRSpatialReferenceH hSRS, const(char) *pszVariantName, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Tunesia Mining Grid  */
-OGRErr  OSRSetTMG(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetTMG(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Transverse Mercator (South Oriented) */
-OGRErr  OSRSetTMSO(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetTMSO(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong, double dfScale, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
-OGRErr  OSRSetTPED(OGRSpatialReferenceH hSRS, double dfLat1, double dfLong1, double dfLat2, double dfLong2, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetTPED(OGRSpatialReferenceH hSRS, double dfLat1, double dfLong1, double dfLat2, double dfLong2, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** VanDerGrinten */
-OGRErr  OSRSetVDG(OGRSpatialReferenceH hSRS, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetVDG(OGRSpatialReferenceH hSRS, double dfCenterLong, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Wagner I -- VII */
-OGRErr  OSRSetWagner(OGRSpatialReferenceH hSRS, int nVariation, double dfCenterLat, double dfFalseEasting, double dfFalseNorthing);
+OGRErr  OSRSetWagner(OGRSpatialReferenceH hSRS, int nVariation, double dfCenterLat, double dfFalseEasting, double dfFalseNorthing) nothrow @nogc;
 
 /** Quadrilateralized Spherical Cube */
-OGRErr  OSRSetQSC(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong);
+OGRErr  OSRSetQSC(OGRSpatialReferenceH hSRS, double dfCenterLat, double dfCenterLong) nothrow @nogc;
 
 /** Spherical, Cross-track, Height */
-OGRErr  OSRSetSCH(OGRSpatialReferenceH hSRS, double dfPegLat, double dfPegLong, double dfPegHeading, double dfPegHgt);
+OGRErr  OSRSetSCH(OGRSpatialReferenceH hSRS, double dfPegLat, double dfPegLong, double dfPegHeading, double dfPegHgt) nothrow @nogc;
 
 
-double  OSRCalcInvFlattening(double dfSemiMajor, double dfSemiMinor);
-double  OSRCalcSemiMinorFromInvFlattening(double dfSemiMajor, double dfInvFlattening);
+double  OSRCalcInvFlattening(double dfSemiMajor, double dfSemiMinor) nothrow @nogc;
+double  OSRCalcSemiMinorFromInvFlattening(double dfSemiMajor, double dfInvFlattening) nothrow @nogc;
 
-void  OSRCleanup();
+void  OSRCleanup() nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      OGRCoordinateTransform C API.                                   */
 /* -------------------------------------------------------------------- */
-extern (Windows):
-OGRCoordinateTransformationH  OCTNewCoordinateTransformation(OGRSpatialReferenceH hSourceSRS, OGRSpatialReferenceH hTargetSRS);
-void  OCTDestroyCoordinateTransformation(OGRCoordinateTransformationH );
+extern (System):
+OGRCoordinateTransformationH  OCTNewCoordinateTransformation(OGRSpatialReferenceH hSourceSRS, OGRSpatialReferenceH hTargetSRS) nothrow @nogc;
+void  OCTDestroyCoordinateTransformation(OGRCoordinateTransformationH ) nothrow @nogc;
 
-int  OCTTransform(OGRCoordinateTransformationH hCT, int nCount, double *x, double *y, double *z);
+int  OCTTransform(OGRCoordinateTransformationH hCT, int nCount, double *x, double *y, double *z) nothrow @nogc;
 
-int  OCTTransformEx(OGRCoordinateTransformationH hCT, int nCount, double *x, double *y, double *z, int *pabSuccess);
+int  OCTTransformEx(OGRCoordinateTransformationH hCT, int nCount, double *x, double *y, double *z, int *pabSuccess) nothrow @nogc;
 
 /* this is really private to OGR. */
 extern (C):
-char * OCTProj4Normalize(char *pszProj4Src);
+char * OCTProj4Normalize(char *pszProj4Src) nothrow @nogc;
 
-void  OCTCleanupProjMutex();
+void  OCTCleanupProjMutex() nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Projection transform dictionary query.                          */
 /* -------------------------------------------------------------------- */
 
-char ** OPTGetProjectionMethods();
-char ** OPTGetParameterList(const(char) *pszProjectionMethod, char **ppszUserName);
-int  OPTGetParameterInfo(const(char) *pszProjectionMethod, const(char) *pszParameterName, char **ppszUserName, char **ppszType, double *pdfDefaultValue);
+char ** OPTGetProjectionMethods() nothrow @nogc;
+char ** OPTGetParameterList(const(char) *pszProjectionMethod, char **ppszUserName) nothrow @nogc;
+int  OPTGetParameterInfo(const(char) *pszProjectionMethod, const(char) *pszParameterName, char **ppszUserName, char **ppszType, double *pdfDefaultValue) nothrow @nogc;

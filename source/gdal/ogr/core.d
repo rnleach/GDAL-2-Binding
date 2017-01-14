@@ -66,11 +66,11 @@ struct _N2
 }
 alias _N2 OGREnvelope3D;
 
-void * OGRMalloc(size_t );
-void * OGRCalloc(size_t , size_t );
-void * OGRRealloc(void *, size_t );
-char * OGRStrdup(const(char) *);
-void  OGRFree(void *);
+void * OGRMalloc(size_t ) nothrow @nogc;
+void * OGRCalloc(size_t , size_t ) nothrow @nogc;
+void * OGRRealloc(void *, size_t ) nothrow @nogc;
+char * OGRStrdup(const(char) *) nothrow @nogc;
+void  OGRFree(void *) nothrow @nogc;
 
 alias int OGRErr;
 
@@ -202,7 +202,7 @@ alias wkbFlatten = OGR_GT_Flatten;
 /** Return if the geometry type is a 3D geometry type
   * @since GDAL 2.0
   */
-bool  wkbHasZ(OGRwkbGeometryType x) { return OGR_GT_HasZ(x) != 0; }
+bool  wkbHasZ(OGRwkbGeometryType x)  nothrow @nogc { return OGR_GT_HasZ(x) != 0; }
 
 /** Return the 3D geometry type corresponding to the specified geometry type.
   * @since GDAL 2.0
@@ -212,7 +212,7 @@ alias wkbSetZ = OGR_GT_SetZ;
 /** Return if the geometry type is a measured geometry type
   * @since GDAL 2.1
   */
-bool wkbHasM(OGRwkbGeometryType x) { return OGR_GT_HasM(x) != 0; }
+bool wkbHasM(OGRwkbGeometryType x)  nothrow @nogc { return OGR_GT_HasM(x) != 0; }
 
 /** Return the measured geometry type corresponding to the specified geometry type.
   * @since GDAL 2.1
@@ -221,22 +221,22 @@ alias wkbSetM = OGR_GT_SetM;
 
 enum ogrZMarker = 0x21125711;
 
-const(char) * OGRGeometryTypeToName(OGRwkbGeometryType eType);
-OGRwkbGeometryType  OGRMergeGeometryTypes(OGRwkbGeometryType eMain, OGRwkbGeometryType eExtra);
-OGRwkbGeometryType  OGRMergeGeometryTypesEx(OGRwkbGeometryType eMain, OGRwkbGeometryType eExtra, int bAllowPromotingToCurves);
-OGRwkbGeometryType  OGR_GT_Flatten(OGRwkbGeometryType eType);
-OGRwkbGeometryType  OGR_GT_SetZ(OGRwkbGeometryType eType);
-OGRwkbGeometryType  OGR_GT_SetM(OGRwkbGeometryType eType);
-OGRwkbGeometryType  OGR_GT_SetModifier(OGRwkbGeometryType eType, int bSetZ, int bSetM);
-int  OGR_GT_HasZ(OGRwkbGeometryType eType);
-int  OGR_GT_HasM(OGRwkbGeometryType eType);
-int  OGR_GT_IsSubClassOf(OGRwkbGeometryType eType, OGRwkbGeometryType eSuperType);
-int  OGR_GT_IsCurve(OGRwkbGeometryType );
-int  OGR_GT_IsSurface(OGRwkbGeometryType );
-int  OGR_GT_IsNonLinear(OGRwkbGeometryType );
-OGRwkbGeometryType  OGR_GT_GetCollection(OGRwkbGeometryType eType);
-OGRwkbGeometryType  OGR_GT_GetCurve(OGRwkbGeometryType eType);
-OGRwkbGeometryType  OGR_GT_GetLinear(OGRwkbGeometryType eType);
+const(char) * OGRGeometryTypeToName(OGRwkbGeometryType eType) nothrow @nogc;
+OGRwkbGeometryType  OGRMergeGeometryTypes(OGRwkbGeometryType eMain, OGRwkbGeometryType eExtra) nothrow @nogc;
+OGRwkbGeometryType  OGRMergeGeometryTypesEx(OGRwkbGeometryType eMain, OGRwkbGeometryType eExtra, int bAllowPromotingToCurves) nothrow @nogc;
+OGRwkbGeometryType  OGR_GT_Flatten(OGRwkbGeometryType eType) nothrow @nogc;
+OGRwkbGeometryType  OGR_GT_SetZ(OGRwkbGeometryType eType) nothrow @nogc;
+OGRwkbGeometryType  OGR_GT_SetM(OGRwkbGeometryType eType) nothrow @nogc;
+OGRwkbGeometryType  OGR_GT_SetModifier(OGRwkbGeometryType eType, int bSetZ, int bSetM) nothrow @nogc;
+int  OGR_GT_HasZ(OGRwkbGeometryType eType) nothrow @nogc;
+int  OGR_GT_HasM(OGRwkbGeometryType eType) nothrow @nogc;
+int  OGR_GT_IsSubClassOf(OGRwkbGeometryType eType, OGRwkbGeometryType eSuperType) nothrow @nogc;
+int  OGR_GT_IsCurve(OGRwkbGeometryType ) nothrow @nogc;
+int  OGR_GT_IsSurface(OGRwkbGeometryType ) nothrow @nogc;
+int  OGR_GT_IsNonLinear(OGRwkbGeometryType ) nothrow @nogc;
+OGRwkbGeometryType  OGR_GT_GetCollection(OGRwkbGeometryType eType) nothrow @nogc;
+OGRwkbGeometryType  OGR_GT_GetCurve(OGRwkbGeometryType eType) nothrow @nogc;
+OGRwkbGeometryType  OGR_GT_GetLinear(OGRwkbGeometryType eType) nothrow @nogc;
 
 enum
 {
@@ -460,13 +460,13 @@ union _N9
 }
 alias _N9 OGRField;
 
-int OGR_GET_MS(double floatingpoint_sec)
+int OGR_GET_MS(double floatingpoint_sec) pure nothrow @nogc
 { 
   return 
     cast(int)((floatingpoint_sec - cast(int)(floatingpoint_sec)) * 1000 + 0.5);
 }
 
-int  OGRParseDate(const(char) *pszInput, OGRField *psOutput, int nOptions);
+int  OGRParseDate(const(char) *pszInput, OGRField *psOutput, int nOptions) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Constants from ogrsf_frmts.h for capabilities.                  */
@@ -632,8 +632,8 @@ alias ogr_style_tool_param_label_id OGRSTLabelParam;
 
 /* Note to developers : please keep this section in sync with gdal.h */
 
-extern (Windows):
-const(char) * GDALVersionInfo(const(char) *);
+extern (System):
+const(char) * GDALVersionInfo(const(char) *) nothrow @nogc;
 
 
 /** Return TRUE if GDAL library version at runtime matches nVersionMajor.nVersionMinor.
@@ -647,4 +647,4 @@ const(char) * GDALVersionInfo(const(char) *);
                                    will issue a failure mentioning the name of
                                    the calling component.
   */
-int  GDALCheckVersion(int nVersionMajor, int nVersionMinor, const(char) *pszCallingComponentName);
+int  GDALCheckVersion(int nVersionMajor, int nVersionMinor, const(char) *pszCallingComponentName) nothrow @nogc;

@@ -69,21 +69,21 @@ enum
 extern (C):
 alias int GDALDataType;
 
-extern (Windows):
+extern (System):
 
 //C     int CPL_DLL CPL_STDCALL GDALGetDataTypeSize( GDALDataType );  // Deprecated.
 deprecated ("Use GDALGetDataTypeSizeBits instead.") 
-int  GDALGetDataTypeSize(GDALDataType );
+int  GDALGetDataTypeSize(GDALDataType ) pure nothrow @nogc; 
 
-int  GDALGetDataTypeSizeBits(GDALDataType eDataType);
-int  GDALGetDataTypeSizeBytes(GDALDataType );
-int  GDALDataTypeIsComplex(GDALDataType );
-const(char) * GDALGetDataTypeName(GDALDataType );
-GDALDataType  GDALGetDataTypeByName(const char *);
-GDALDataType  GDALDataTypeUnion(GDALDataType , GDALDataType );
+int  GDALGetDataTypeSizeBits(GDALDataType eDataType) pure nothrow @nogc;
+int  GDALGetDataTypeSizeBytes(GDALDataType ) pure nothrow @nogc;
+int  GDALDataTypeIsComplex(GDALDataType ) pure nothrow @nogc;
+const(char) * GDALGetDataTypeName(GDALDataType ) nothrow @nogc;
+GDALDataType  GDALGetDataTypeByName(const char *) pure nothrow @nogc;
+GDALDataType  GDALDataTypeUnion(GDALDataType , GDALDataType ) pure nothrow @nogc;
 
 extern (C):
-double  GDALAdjustValueToDataType(GDALDataType eDT, double dfValue, int *pbClamped, int *pbRounded);
+double  GDALAdjustValueToDataType(GDALDataType eDT, double dfValue, int *pbClamped, int *pbRounded) nothrow @nogc;
 
 /**
 * status of the asynchronous stream
@@ -98,9 +98,9 @@ enum
 }
 alias int GDALAsyncStatusType;
 
-extern (Windows):
-const(char) * GDALGetAsyncStatusTypeName(GDALAsyncStatusType );
-GDALAsyncStatusType  GDALGetAsyncStatusTypeByName(const char *);
+extern (System):
+const(char) * GDALGetAsyncStatusTypeName(GDALAsyncStatusType ) nothrow @nogc;
+GDALAsyncStatusType  GDALGetAsyncStatusTypeByName(const char *) nothrow @nogc;
 
 /*! Flag indicating read/write, or read-only access to data. */
 enum
@@ -165,7 +165,7 @@ enum RASTERIO_EXTRA_ARG_CURRENT_VERSION = 1;
   * @since GDAL 2.0
   */
 //C     #define INIT_RASTERIO_EXTRA_ARG(s)....... 
-void INIT_RASTERIO_EXTRA_ARG(ref GDALRasterIOExtraArg s)
+void INIT_RASTERIO_EXTRA_ARG(ref GDALRasterIOExtraArg s) nothrow @nogc
 { 
     s.nVersion = RASTERIO_EXTRA_ARG_CURRENT_VERSION;          
     s.eResampleAlg = GRIORA_NearestNeighbour;
@@ -198,8 +198,8 @@ enum
 }
 alias int GDALColorInterp;
 
-const(char) * GDALGetColorInterpretationName(GDALColorInterp );
-GDALColorInterp  GDALGetColorInterpretationByName(const char *pszName);
+const(char) * GDALGetColorInterpretationName(GDALColorInterp ) nothrow @nogc;
+GDALColorInterp  GDALGetColorInterpretationByName(const char *pszName) nothrow @nogc;
 
 /*! Types of color interpretations for a GDALColorTable. */
 enum
@@ -211,7 +211,7 @@ enum
 }
 alias int GDALPaletteInterp;
 
-const(char) * GDALGetPaletteInterpretationName(GDALPaletteInterp );
+const(char) * GDALGetPaletteInterpretationName(GDALPaletteInterp ) nothrow @nogc;
 
 /* "well known" metadata items. */
 enum GDALMD_AREA_OR_POINT = "AREA_OR_POINT";
@@ -341,13 +341,13 @@ enum GDAL_DCAP_DEFAULT_FIELDS = "DCAP_DEFAULT_FIELDS";
  */
 enum GDAL_DCAP_NOTNULL_GEOMFIELDS = "DCAP_NOTNULL_GEOMFIELDS";
 
-extern (Windows):
-void  GDALAllRegister();
-GDALDatasetH  GDALCreate(GDALDriverH hDriver, const char *, int , int , int , GDALDataType , char **);
-GDALDatasetH  GDALCreateCopy(GDALDriverH , const char *, GDALDatasetH , int , char **, GDALProgressFunc , void *);
-GDALDriverH  GDALIdentifyDriver(const char *pszFilename, char **papszFileList);
-GDALDatasetH  GDALOpen(const char *pszFilename, GDALAccess eAccess);
-GDALDatasetH  GDALOpenShared(const char *, GDALAccess );
+extern (System):
+void  GDALAllRegister() nothrow @nogc;
+GDALDatasetH  GDALCreate(GDALDriverH hDriver, const char *, int , int , int , GDALDataType , char **) nothrow @nogc;
+GDALDatasetH  GDALCreateCopy(GDALDriverH , const char *, GDALDatasetH , int , char **, GDALProgressFunc , void *) nothrow @nogc;
+GDALDriverH  GDALIdentifyDriver(const char *pszFilename, char **papszFileList) nothrow @nogc;
+GDALDatasetH  GDALOpen(const(char) *pszFilename, GDALAccess eAccess) nothrow @nogc;
+GDALDatasetH  GDALOpenShared(const char *, GDALAccess ) nothrow @nogc;
 
 /* Note: we define GDAL_OF_READONLY and GDAL_OF_UPDATE to be on purpose */
 /* equals to GA_ReadOnly and GA_Update */
@@ -446,30 +446,30 @@ enum GDAL_OF_HASHSET_BLOCK_ACCESS = 0x200;
 enum GDAL_OF_RESERVED_1 = 0x300;
 enum GDAL_OF_BLOCK_ACCESS_MASK = 0x300;
 
-GDALDatasetH  GDALOpenEx(const char *pszFilename, uint nOpenFlags, const char **papszAllowedDrivers, const char **papszOpenOptions, const char **papszSiblingFiles);
-int  GDALDumpOpenDatasets(FILE *); // This is the FILE in stdio.h
-GDALDriverH  GDALGetDriverByName(const char *);
-int  GDALGetDriverCount();
-GDALDriverH  GDALGetDriver(int );
-void  GDALDestroyDriver(GDALDriverH );
-int  GDALRegisterDriver(GDALDriverH );
-void  GDALDeregisterDriver(GDALDriverH );
-void  GDALDestroyDriverManager();
+GDALDatasetH  GDALOpenEx(const char *pszFilename, uint nOpenFlags, const char **papszAllowedDrivers, const char **papszOpenOptions, const char **papszSiblingFiles) nothrow @nogc;
+int  GDALDumpOpenDatasets(FILE *) nothrow @nogc; // This is the FILE in stdio.h
+GDALDriverH  GDALGetDriverByName(const char *) nothrow @nogc;
+int  GDALGetDriverCount() nothrow @nogc;
+GDALDriverH  GDALGetDriver(int ) nothrow @nogc;
+void  GDALDestroyDriver(GDALDriverH ) nothrow @nogc;
+int  GDALRegisterDriver(GDALDriverH ) nothrow @nogc;
+void  GDALDeregisterDriver(GDALDriverH ) nothrow @nogc;
+void  GDALDestroyDriverManager() nothrow @nogc;
 
 extern (C):
-void  GDALDestroy();
+void  GDALDestroy() nothrow @nogc;
 
-extern (Windows):
-CPLErr  GDALDeleteDataset(GDALDriverH , const char *);
-CPLErr  GDALRenameDataset(GDALDriverH , const char *pszNewName, const char *pszOldName);
-CPLErr  GDALCopyDatasetFiles(GDALDriverH , const char *pszNewName, const char *pszOldName);
-int  GDALValidateCreationOptions(GDALDriverH , char **papszCreationOptions);
+extern (System):
+CPLErr  GDALDeleteDataset(GDALDriverH , const char *) nothrow @nogc;
+CPLErr  GDALRenameDataset(GDALDriverH , const char *pszNewName, const char *pszOldName) nothrow @nogc;
+CPLErr  GDALCopyDatasetFiles(GDALDriverH , const char *pszNewName, const char *pszOldName) nothrow @nogc;
+int  GDALValidateCreationOptions(GDALDriverH , char **papszCreationOptions) nothrow @nogc;
 
 /* The following are deprecated */
-deprecated const(char) * GDALGetDriverShortName(GDALDriverH );
-deprecated const(char) * GDALGetDriverLongName(GDALDriverH );
-deprecated const(char) * GDALGetDriverHelpTopic(GDALDriverH );
-deprecated const(char) * GDALGetDriverCreationOptionList(GDALDriverH );
+deprecated const(char) * GDALGetDriverShortName(GDALDriverH ) nothrow @nogc;
+deprecated const(char) * GDALGetDriverLongName(GDALDriverH ) nothrow @nogc;
+deprecated const(char) * GDALGetDriverHelpTopic(GDALDriverH ) nothrow @nogc;
+deprecated const(char) * GDALGetDriverCreationOptionList(GDALDriverH ) nothrow @nogc;
 
 /* ==================================================================== */
 /*      GDAL_GCP                                                        */
@@ -489,92 +489,92 @@ struct _N28
 extern (C):
 alias _N28 GDAL_GCP;
 
-extern (Windows):
-void  GDALInitGCPs(int , GDAL_GCP *);
-void  GDALDeinitGCPs(int , GDAL_GCP *);
-GDAL_GCP * GDALDuplicateGCPs(int , GDAL_GCP *);
+extern (System):
+void  GDALInitGCPs(int , GDAL_GCP *) nothrow @nogc;
+void  GDALDeinitGCPs(int , GDAL_GCP *) nothrow @nogc;
+GDAL_GCP * GDALDuplicateGCPs(int , GDAL_GCP *) nothrow @nogc;
 
-int  GDALGCPsToGeoTransform(int nGCPCount, GDAL_GCP *pasGCPs, double *padfGeoTransform, int bApproxOK);
-int  GDALInvGeoTransform(double *padfGeoTransformIn, double *padfInvGeoTransformOut);
-void  GDALApplyGeoTransform(double *, double , double , double *, double *);
+int  GDALGCPsToGeoTransform(int nGCPCount, GDAL_GCP *pasGCPs, double *padfGeoTransform, int bApproxOK) nothrow @nogc;
+int  GDALInvGeoTransform(double *padfGeoTransformIn, double *padfInvGeoTransformOut) nothrow @nogc;
+void  GDALApplyGeoTransform(double *, double , double , double *, double *) nothrow @nogc;
 
 extern (C):
-void  GDALComposeGeoTransforms(double *padfGeoTransform1, double *padfGeoTransform2, double *padfGeoTransformOut);
+void  GDALComposeGeoTransforms(double *padfGeoTransform1, double *padfGeoTransform2, double *padfGeoTransformOut) nothrow @nogc;
 
 /* ==================================================================== */
 /*      major objects (dataset, and, driver, drivermanager).            */
 /* ==================================================================== */
-extern (Windows):
-char ** GDALGetMetadataDomainList(GDALMajorObjectH hObject);
-char ** GDALGetMetadata(GDALMajorObjectH , const char *);
-CPLErr  GDALSetMetadata(GDALMajorObjectH , const char **, const char *);
-const(char) * GDALGetMetadataItem(GDALMajorObjectH , const char *, const char *);
-CPLErr  GDALSetMetadataItem(GDALMajorObjectH , const char *, const char *, const char *);
-const(char) * GDALGetDescription(GDALMajorObjectH );
-void  GDALSetDescription(GDALMajorObjectH , const char *);
+extern (System):
+char ** GDALGetMetadataDomainList(GDALMajorObjectH hObject) nothrow @nogc;
+char ** GDALGetMetadata(GDALMajorObjectH , const char *) nothrow @nogc;
+CPLErr  GDALSetMetadata(GDALMajorObjectH , const char **, const char *) nothrow @nogc;
+const(char) * GDALGetMetadataItem(GDALMajorObjectH , const char *, const char *) nothrow @nogc;
+CPLErr  GDALSetMetadataItem(GDALMajorObjectH , const char *, const char *, const char *) nothrow @nogc;
+const(char) * GDALGetDescription(GDALMajorObjectH ) nothrow @nogc;
+void  GDALSetDescription(GDALMajorObjectH , const char *) nothrow @nogc;
 
 /* ==================================================================== */
 /*      GDALDataset class ... normally this represents one file.        */
 /* ==================================================================== */
 enum GDAL_DS_LAYER_CREATIONOPTIONLIST = "DS_LAYER_CREATIONOPTIONLIST";
 
-GDALDriverH  GDALGetDatasetDriver(GDALDatasetH ); 
-char ** GDALGetFileList(GDALDatasetH );
-void  GDALClose(GDALDatasetH );
-int  GDALGetRasterXSize(GDALDatasetH );
-int  GDALGetRasterYSize(GDALDatasetH );
-int  GDALGetRasterCount(GDALDatasetH );
-GDALRasterBandH  GDALGetRasterBand(GDALDatasetH , int );
+GDALDriverH  GDALGetDatasetDriver(GDALDatasetH ) nothrow @nogc; 
+char ** GDALGetFileList(GDALDatasetH ) nothrow @nogc;
+void  GDALClose(GDALDatasetH ) nothrow @nogc;
+int  GDALGetRasterXSize(GDALDatasetH ) nothrow @nogc;
+int  GDALGetRasterYSize(GDALDatasetH ) nothrow @nogc;
+int  GDALGetRasterCount(GDALDatasetH ) nothrow @nogc;
+GDALRasterBandH  GDALGetRasterBand(GDALDatasetH , int ) nothrow @nogc;
 
-CPLErr  GDALAddBand(GDALDatasetH hDS, GDALDataType eType, char **papszOptions);
-GDALAsyncReaderH  GDALBeginAsyncReader(GDALDatasetH hDS, int nXOff, int nYOff, int nXSize, int nYSize, void *pBuf, int nBufXSize, int nBufYSize, GDALDataType eBufType, int nBandCount, int *panBandMap, int nPixelSpace, int nLineSpace, int nBandSpace, char **papszOptions);
-void  GDALEndAsyncReader(GDALDatasetH hDS, GDALAsyncReaderH hAsynchReaderH);
-CPLErr  GDALDatasetRasterIO(GDALDatasetH hDS, GDALRWFlag eRWFlag, int nDSXOff, int nDSYOff, int nDSXSize, int nDSYSize, void *pBuffer, int nBXSize, int nBYSize, GDALDataType eBDataType, int nBandCount, int *panBandCount, int nPixelSpace, int nLineSpace, int nBandSpace);
-CPLErr  GDALDatasetRasterIOEx(GDALDatasetH hDS, GDALRWFlag eRWFlag, int nDSXOff, int nDSYOff, int nDSXSize, int nDSYSize, void *pBuffer, int nBXSize, int nBYSize, GDALDataType eBDataType, int nBandCount, int *panBandCount, GSpacing nPixelSpace, GSpacing nLineSpace, GSpacing nBandSpace, GDALRasterIOExtraArg *psExtraArg);
-CPLErr  GDALDatasetAdviseRead(GDALDatasetH hDS, int nDSXOff, int nDSYOff, int nDSXSize, int nDSYSize, int nBXSize, int nBYSize, GDALDataType eBDataType, int nBandCount, int *panBandCount, char **papszOptions);
-const(char) * GDALGetProjectionRef(GDALDatasetH );
-CPLErr  GDALSetProjection(GDALDatasetH , const char *);
-CPLErr  GDALGetGeoTransform(GDALDatasetH , double *);
-CPLErr  GDALSetGeoTransform(GDALDatasetH , double *);
+CPLErr  GDALAddBand(GDALDatasetH hDS, GDALDataType eType, char **papszOptions) nothrow @nogc;
+GDALAsyncReaderH  GDALBeginAsyncReader(GDALDatasetH hDS, int nXOff, int nYOff, int nXSize, int nYSize, void *pBuf, int nBufXSize, int nBufYSize, GDALDataType eBufType, int nBandCount, int *panBandMap, int nPixelSpace, int nLineSpace, int nBandSpace, char **papszOptions) nothrow @nogc;
+void  GDALEndAsyncReader(GDALDatasetH hDS, GDALAsyncReaderH hAsynchReaderH) nothrow @nogc;
+CPLErr  GDALDatasetRasterIO(GDALDatasetH hDS, GDALRWFlag eRWFlag, int nDSXOff, int nDSYOff, int nDSXSize, int nDSYSize, void *pBuffer, int nBXSize, int nBYSize, GDALDataType eBDataType, int nBandCount, int *panBandCount, int nPixelSpace, int nLineSpace, int nBandSpace) nothrow @nogc;
+CPLErr  GDALDatasetRasterIOEx(GDALDatasetH hDS, GDALRWFlag eRWFlag, int nDSXOff, int nDSYOff, int nDSXSize, int nDSYSize, void *pBuffer, int nBXSize, int nBYSize, GDALDataType eBDataType, int nBandCount, int *panBandCount, GSpacing nPixelSpace, GSpacing nLineSpace, GSpacing nBandSpace, GDALRasterIOExtraArg *psExtraArg) nothrow @nogc;
+CPLErr  GDALDatasetAdviseRead(GDALDatasetH hDS, int nDSXOff, int nDSYOff, int nDSXSize, int nDSYSize, int nBXSize, int nBYSize, GDALDataType eBDataType, int nBandCount, int *panBandCount, char **papszOptions) nothrow @nogc;
+const(char) * GDALGetProjectionRef(GDALDatasetH ) nothrow @nogc;
+CPLErr  GDALSetProjection(GDALDatasetH , const char *) nothrow @nogc;
+CPLErr  GDALGetGeoTransform(GDALDatasetH , double *) nothrow @nogc;
+CPLErr  GDALSetGeoTransform(GDALDatasetH , double *) nothrow @nogc;
 
-int  GDALGetGCPCount(GDALDatasetH );
-const(char) * GDALGetGCPProjection(GDALDatasetH );
-GDAL_GCP * GDALGetGCPs(GDALDatasetH );
-CPLErr  GDALSetGCPs(GDALDatasetH , int , GDAL_GCP *, const char *);
+int  GDALGetGCPCount(GDALDatasetH ) nothrow @nogc;
+const(char) * GDALGetGCPProjection(GDALDatasetH ) nothrow @nogc;
+GDAL_GCP * GDALGetGCPs(GDALDatasetH ) nothrow @nogc;
+CPLErr  GDALSetGCPs(GDALDatasetH , int , GDAL_GCP *, const char *) nothrow @nogc;
 
-void * GDALGetInternalHandle(GDALDatasetH , const char *);
-int  GDALReferenceDataset(GDALDatasetH );
-int  GDALDereferenceDataset(GDALDatasetH );
+void * GDALGetInternalHandle(GDALDatasetH , const char *) nothrow @nogc;
+int  GDALReferenceDataset(GDALDatasetH ) nothrow @nogc;
+int  GDALDereferenceDataset(GDALDatasetH ) nothrow @nogc;
 
-CPLErr  GDALBuildOverviews(GDALDatasetH , const char *, int , int *, int , int *, GDALProgressFunc , void *);
-void  GDALGetOpenDatasets(GDALDatasetH **hDS, int *pnCount);
-int  GDALGetAccess(GDALDatasetH hDS);
-void  GDALFlushCache(GDALDatasetH hDS);
+CPLErr  GDALBuildOverviews(GDALDatasetH , const char *, int , int *, int , int *, GDALProgressFunc , void *) nothrow @nogc;
+void  GDALGetOpenDatasets(GDALDatasetH **hDS, int *pnCount) nothrow @nogc;
+int  GDALGetAccess(GDALDatasetH hDS) nothrow @nogc;
+void  GDALFlushCache(GDALDatasetH hDS) nothrow @nogc;
 
-CPLErr  GDALCreateDatasetMaskBand(GDALDatasetH hDS, int nFlags);
+CPLErr  GDALCreateDatasetMaskBand(GDALDatasetH hDS, int nFlags) nothrow @nogc;
 
-CPLErr  GDALDatasetCopyWholeRaster(GDALDatasetH hSrcDS, GDALDatasetH hDstDS, char **papszOptions, GDALProgressFunc pfnProgress, void *pProgressData);
+CPLErr  GDALDatasetCopyWholeRaster(GDALDatasetH hSrcDS, GDALDatasetH hDstDS, char **papszOptions, GDALProgressFunc pfnProgress, void *pProgressData) nothrow @nogc;
 
-CPLErr  GDALRasterBandCopyWholeRaster(GDALRasterBandH hSrcBand, GDALRasterBandH hDstBand, char **papszOptions, GDALProgressFunc pfnProgress, void *pProgressData);
+CPLErr  GDALRasterBandCopyWholeRaster(GDALRasterBandH hSrcBand, GDALRasterBandH hDstBand, char **papszOptions, GDALProgressFunc pfnProgress, void *pProgressData) nothrow @nogc;
 
 extern (C):
-CPLErr  GDALRegenerateOverviews(GDALRasterBandH hSrcBand, int nOverviewCount, GDALRasterBandH *pahOverviewBands, const char *pszResampling, GDALProgressFunc pfnProgress, void *pProgressData);
+CPLErr  GDALRegenerateOverviews(GDALRasterBandH hSrcBand, int nOverviewCount, GDALRasterBandH *pahOverviewBands, const char *pszResampling, GDALProgressFunc pfnProgress, void *pProgressData) nothrow @nogc;
 
-int  GDALDatasetGetLayerCount(GDALDatasetH );
-OGRLayerH  GDALDatasetGetLayer(GDALDatasetH , int );
-OGRLayerH  GDALDatasetGetLayerByName(GDALDatasetH , const char *);
-OGRErr  GDALDatasetDeleteLayer(GDALDatasetH , int );
-OGRLayerH  GDALDatasetCreateLayer(GDALDatasetH , const char *, OGRSpatialReferenceH , OGRwkbGeometryType , char **);
-OGRLayerH  GDALDatasetCopyLayer(GDALDatasetH , OGRLayerH , const char *, char **);
-int  GDALDatasetTestCapability(GDALDatasetH , const char *);
-OGRLayerH  GDALDatasetExecuteSQL(GDALDatasetH , const char *, OGRGeometryH , const char *);
-void  GDALDatasetReleaseResultSet(GDALDatasetH , OGRLayerH );
-OGRStyleTableH  GDALDatasetGetStyleTable(GDALDatasetH );
-void  GDALDatasetSetStyleTableDirectly(GDALDatasetH , OGRStyleTableH );
-void  GDALDatasetSetStyleTable(GDALDatasetH , OGRStyleTableH );
-OGRErr  GDALDatasetStartTransaction(GDALDatasetH hDS, int bForce);
-OGRErr  GDALDatasetCommitTransaction(GDALDatasetH hDS);
-OGRErr  GDALDatasetRollbackTransaction(GDALDatasetH hDS);
+int  GDALDatasetGetLayerCount(GDALDatasetH ) nothrow @nogc;
+OGRLayerH  GDALDatasetGetLayer(GDALDatasetH , int ) nothrow @nogc;
+OGRLayerH  GDALDatasetGetLayerByName(GDALDatasetH , const char *) nothrow @nogc;
+OGRErr  GDALDatasetDeleteLayer(GDALDatasetH , int ) nothrow @nogc;
+OGRLayerH  GDALDatasetCreateLayer(GDALDatasetH , const char *, OGRSpatialReferenceH , OGRwkbGeometryType , char **) nothrow @nogc;
+OGRLayerH  GDALDatasetCopyLayer(GDALDatasetH , OGRLayerH , const char *, char **) nothrow @nogc;
+int  GDALDatasetTestCapability(GDALDatasetH , const char *) nothrow @nogc;
+OGRLayerH  GDALDatasetExecuteSQL(GDALDatasetH , const char *, OGRGeometryH , const char *) nothrow @nogc;
+void  GDALDatasetReleaseResultSet(GDALDatasetH , OGRLayerH ) nothrow @nogc;
+OGRStyleTableH  GDALDatasetGetStyleTable(GDALDatasetH ) nothrow @nogc;
+void  GDALDatasetSetStyleTableDirectly(GDALDatasetH , OGRStyleTableH ) nothrow @nogc;
+void  GDALDatasetSetStyleTable(GDALDatasetH , OGRStyleTableH ) nothrow @nogc;
+OGRErr  GDALDatasetStartTransaction(GDALDatasetH hDS, int bForce) nothrow @nogc;
+OGRErr  GDALDatasetCommitTransaction(GDALDatasetH hDS) nothrow @nogc;
+OGRErr  GDALDatasetRollbackTransaction(GDALDatasetH hDS) nothrow @nogc;
 
 /* ==================================================================== */
 /*      GDALRasterBand ... one band/channel in a dataset.               */
@@ -617,99 +617,99 @@ alias GDALDerivedPixelFunc = CPLErr function(void **papoSources, int nSources,
     void *pData, int nBufXSize, int nBufYSize, GDALDataType eSrcType, 
     GDALDataType eBufType, int nPixelSpace, int nLineSpace);
 
-extern (Windows):
-GDALDataType  GDALGetRasterDataType(GDALRasterBandH );
-void  GDALGetBlockSize(GDALRasterBandH , int *pnXSize, int *pnYSize);
+extern (System):
+GDALDataType  GDALGetRasterDataType(GDALRasterBandH ) nothrow @nogc;
+void  GDALGetBlockSize(GDALRasterBandH , int *pnXSize, int *pnYSize) nothrow @nogc;
 
 CPLErr  GDALRasterAdviseRead(GDALRasterBandH hRB, int nDSXOff, int nDSYOff, 
     int nDSXSize, int nDSYSize, int nBXSize, int nBYSize, 
-    GDALDataType eBDataType, char **papszOptions);
+    GDALDataType eBDataType, char **papszOptions) nothrow @nogc;
 
 CPLErr  GDALRasterIO(GDALRasterBandH hRBand, GDALRWFlag eRWFlag, int nDSXOff, 
     int nDSYOff, int nDSXSize, int nDSYSize, void *pBuffer, int nBXSize, 
-    int nBYSize, GDALDataType eBDataType, int nPixelSpace, int nLineSpace);
+    int nBYSize, GDALDataType eBDataType, int nPixelSpace, int nLineSpace) nothrow @nogc;
 CPLErr  GDALRasterIOEx(GDALRasterBandH hRBand, GDALRWFlag eRWFlag, int nDSXOff,
     int nDSYOff, int nDSXSize, int nDSYSize, void *pBuffer, int nBXSize, 
     int nBYSize, GDALDataType eBDataType, GSpacing nPixelSpace, 
-    GSpacing nLineSpace, GDALRasterIOExtraArg *psExtraArg);
-CPLErr  GDALReadBlock(GDALRasterBandH , int , int , void *);
-CPLErr  GDALWriteBlock(GDALRasterBandH , int , int , void *);
-int  GDALGetRasterBandXSize(GDALRasterBandH );
-int  GDALGetRasterBandYSize(GDALRasterBandH );
-GDALAccess  GDALGetRasterAccess(GDALRasterBandH );
-int  GDALGetBandNumber(GDALRasterBandH );
-GDALDatasetH  GDALGetBandDataset(GDALRasterBandH );
+    GSpacing nLineSpace, GDALRasterIOExtraArg *psExtraArg) nothrow @nogc;
+CPLErr  GDALReadBlock(GDALRasterBandH , int , int , void *) nothrow @nogc;
+CPLErr  GDALWriteBlock(GDALRasterBandH , int , int , void *) nothrow @nogc;
+int  GDALGetRasterBandXSize(GDALRasterBandH ) nothrow @nogc;
+int  GDALGetRasterBandYSize(GDALRasterBandH ) nothrow @nogc;
+GDALAccess  GDALGetRasterAccess(GDALRasterBandH ) nothrow @nogc;
+int  GDALGetBandNumber(GDALRasterBandH ) nothrow @nogc;
+GDALDatasetH  GDALGetBandDataset(GDALRasterBandH ) nothrow @nogc;
 
-GDALColorInterp  GDALGetRasterColorInterpretation(GDALRasterBandH );
-CPLErr  GDALSetRasterColorInterpretation(GDALRasterBandH , GDALColorInterp );
-GDALColorTableH  GDALGetRasterColorTable(GDALRasterBandH );
-CPLErr  GDALSetRasterColorTable(GDALRasterBandH , GDALColorTableH );
-int  GDALHasArbitraryOverviews(GDALRasterBandH );
-int  GDALGetOverviewCount(GDALRasterBandH );
-GDALRasterBandH  GDALGetOverview(GDALRasterBandH , int );
-double  GDALGetRasterNoDataValue(GDALRasterBandH , int *);
-CPLErr  GDALSetRasterNoDataValue(GDALRasterBandH , double );
-CPLErr  GDALDeleteRasterNoDataValue(GDALRasterBandH );
-char ** GDALGetRasterCategoryNames(GDALRasterBandH );
-CPLErr  GDALSetRasterCategoryNames(GDALRasterBandH , char **);
-double  GDALGetRasterMinimum(GDALRasterBandH , int *pbSuccess);
-double  GDALGetRasterMaximum(GDALRasterBandH , int *pbSuccess);
+GDALColorInterp  GDALGetRasterColorInterpretation(GDALRasterBandH ) nothrow @nogc;
+CPLErr  GDALSetRasterColorInterpretation(GDALRasterBandH , GDALColorInterp ) nothrow @nogc;
+GDALColorTableH  GDALGetRasterColorTable(GDALRasterBandH ) nothrow @nogc;
+CPLErr  GDALSetRasterColorTable(GDALRasterBandH , GDALColorTableH ) nothrow @nogc;
+int  GDALHasArbitraryOverviews(GDALRasterBandH ) nothrow @nogc;
+int  GDALGetOverviewCount(GDALRasterBandH ) nothrow @nogc;
+GDALRasterBandH  GDALGetOverview(GDALRasterBandH , int ) nothrow @nogc;
+double  GDALGetRasterNoDataValue(GDALRasterBandH , int *) nothrow @nogc;
+CPLErr  GDALSetRasterNoDataValue(GDALRasterBandH , double ) nothrow @nogc;
+CPLErr  GDALDeleteRasterNoDataValue(GDALRasterBandH ) nothrow @nogc;
+char ** GDALGetRasterCategoryNames(GDALRasterBandH ) nothrow @nogc;
+CPLErr  GDALSetRasterCategoryNames(GDALRasterBandH , char **) nothrow @nogc;
+double  GDALGetRasterMinimum(GDALRasterBandH , int *pbSuccess) nothrow @nogc;
+double  GDALGetRasterMaximum(GDALRasterBandH , int *pbSuccess) nothrow @nogc;
 CPLErr  GDALGetRasterStatistics(GDALRasterBandH , int bApproxOK, int bForce, 
-    double *pdfMin, double *pdfMax, double *pdfMean, double *pdfStdDev);
+    double *pdfMin, double *pdfMax, double *pdfMean, double *pdfStdDev) nothrow @nogc;
 CPLErr  GDALComputeRasterStatistics(GDALRasterBandH , int bApproxOK, double 
     *pdfMin, double *pdfMax, double *pdfMean, double *pdfStdDev, 
-    GDALProgressFunc pfnProgress, void *pProgressData);
+    GDALProgressFunc pfnProgress, void *pProgressData) nothrow @nogc;
 CPLErr  GDALSetRasterStatistics(GDALRasterBandH hBand, double dfMin, 
-    double dfMax, double dfMean, double dfStdDev);
+    double dfMax, double dfMean, double dfStdDev) nothrow @nogc;
 
-const(char) * GDALGetRasterUnitType(GDALRasterBandH );
-CPLErr  GDALSetRasterUnitType(GDALRasterBandH hBand, const char *pszNewValue);
-double  GDALGetRasterOffset(GDALRasterBandH , int *pbSuccess);
-CPLErr  GDALSetRasterOffset(GDALRasterBandH hBand, double dfNewOffset);
-double  GDALGetRasterScale(GDALRasterBandH , int *pbSuccess);
-CPLErr  GDALSetRasterScale(GDALRasterBandH hBand, double dfNewOffset);
+const(char) * GDALGetRasterUnitType(GDALRasterBandH ) nothrow @nogc;
+CPLErr  GDALSetRasterUnitType(GDALRasterBandH hBand, const char *pszNewValue) nothrow @nogc;
+double  GDALGetRasterOffset(GDALRasterBandH , int *pbSuccess) nothrow @nogc;
+CPLErr  GDALSetRasterOffset(GDALRasterBandH hBand, double dfNewOffset) nothrow @nogc;
+double  GDALGetRasterScale(GDALRasterBandH , int *pbSuccess) nothrow @nogc;
+CPLErr  GDALSetRasterScale(GDALRasterBandH hBand, double dfNewOffset) nothrow @nogc;
 void  GDALComputeRasterMinMax(GDALRasterBandH hBand, int bApproxOK, 
-    double *adfMinMax);
-CPLErr  GDALFlushRasterCache(GDALRasterBandH hBand);
+    double *adfMinMax) nothrow @nogc;
+CPLErr  GDALFlushRasterCache(GDALRasterBandH hBand) nothrow @nogc;
 CPLErr  GDALGetRasterHistogram(GDALRasterBandH hBand, double dfMin, 
     double dfMax, int nBuckets, int *panHistogram, int bIncludeOutOfRange, 
-    int bApproxOK, GDALProgressFunc pfnProgress, void *pProgressData);
+    int bApproxOK, GDALProgressFunc pfnProgress, void *pProgressData) nothrow @nogc;
 CPLErr  GDALGetRasterHistogramEx(GDALRasterBandH hBand, double dfMin, 
     double dfMax, int nBuckets, GUIntBig *panHistogram, int bIncludeOutOfRange, 
-    int bApproxOK, GDALProgressFunc pfnProgress, void *pProgressData);
+    int bApproxOK, GDALProgressFunc pfnProgress, void *pProgressData) nothrow @nogc;
 CPLErr  GDALGetDefaultHistogram(GDALRasterBandH hBand, double *pdfMin, 
     double *pdfMax, int *pnBuckets, int **ppanHistogram, int bForce, 
-    GDALProgressFunc pfnProgress, void *pProgressData);
+    GDALProgressFunc pfnProgress, void *pProgressData) nothrow @nogc;
 CPLErr  GDALGetDefaultHistogramEx(GDALRasterBandH hBand, double *pdfMin, 
     double *pdfMax, int *pnBuckets, GUIntBig **ppanHistogram, int bForce, 
-    GDALProgressFunc pfnProgress, void *pProgressData);
+    GDALProgressFunc pfnProgress, void *pProgressData) nothrow @nogc;
 CPLErr  GDALSetDefaultHistogram(GDALRasterBandH hBand, double dfMin, 
-    double dfMax, int nBuckets, int *panHistogram);
+    double dfMax, int nBuckets, int *panHistogram) nothrow @nogc;
 CPLErr  GDALSetDefaultHistogramEx(GDALRasterBandH hBand, double dfMin, 
-    double dfMax, int nBuckets, GUIntBig *panHistogram);
-int  GDALGetRandomRasterSample(GDALRasterBandH , int , float *);
-GDALRasterBandH  GDALGetRasterSampleOverview(GDALRasterBandH , int );
-GDALRasterBandH  GDALGetRasterSampleOverviewEx(GDALRasterBandH , GUIntBig );
+    double dfMax, int nBuckets, GUIntBig *panHistogram) nothrow @nogc;
+int  GDALGetRandomRasterSample(GDALRasterBandH , int , float *) nothrow @nogc;
+GDALRasterBandH  GDALGetRasterSampleOverview(GDALRasterBandH , int ) nothrow @nogc;
+GDALRasterBandH  GDALGetRasterSampleOverviewEx(GDALRasterBandH , GUIntBig ) nothrow @nogc;
 CPLErr  GDALFillRaster(GDALRasterBandH hBand, double dfRealValue, 
-    double dfImaginaryValue);
+    double dfImaginaryValue) nothrow @nogc;
 CPLErr  GDALComputeBandStats(GDALRasterBandH hBand, int nSampleStep, 
     double *pdfMean, double *pdfStdDev, GDALProgressFunc pfnProgress, 
-    void *pProgressData);
+    void *pProgressData) nothrow @nogc;
 
 extern (C):
 CPLErr  GDALOverviewMagnitudeCorrection(GDALRasterBandH hBaseBand, 
     int nOverviewCount, GDALRasterBandH *pahOverviews, 
-    GDALProgressFunc pfnProgress, void *pProgressData);
+    GDALProgressFunc pfnProgress, void *pProgressData) nothrow @nogc;
 
-extern (Windows):
-GDALRasterAttributeTableH  GDALGetDefaultRAT(GDALRasterBandH hBand);
-CPLErr  GDALSetDefaultRAT(GDALRasterBandH , GDALRasterAttributeTableH );
+extern (System):
+GDALRasterAttributeTableH  GDALGetDefaultRAT(GDALRasterBandH hBand) nothrow @nogc;
+CPLErr  GDALSetDefaultRAT(GDALRasterBandH , GDALRasterAttributeTableH ) nothrow @nogc;
 CPLErr  GDALAddDerivedBandPixelFunc(const char *pszName, 
-    GDALDerivedPixelFunc pfnPixelFunc);
+    GDALDerivedPixelFunc pfnPixelFunc) nothrow @nogc;
 
-GDALRasterBandH  GDALGetMaskBand(GDALRasterBandH hBand);
-int  GDALGetMaskFlags(GDALRasterBandH hBand);
-CPLErr  GDALCreateMaskBand(GDALRasterBandH hBand, int nFlags);
+GDALRasterBandH  GDALGetMaskBand(GDALRasterBandH hBand) nothrow @nogc;
+int  GDALGetMaskFlags(GDALRasterBandH hBand) nothrow @nogc;
+CPLErr  GDALCreateMaskBand(GDALRasterBandH hBand, int nFlags) nothrow @nogc;
 
 enum GMF_ALL_VALID   = 0x01;
 enum GMF_PER_DATASET = 0x02;
@@ -721,48 +721,48 @@ enum GMF_NODATA      = 0x08;
 
 GDALAsyncStatusType  GDALARGetNextUpdatedRegion(GDALAsyncReaderH hARIO, 
     double dfTimeout, int *pnXBufOff, int *pnYBufOff, int *pnXBufSize, 
-    int *pnYBufSize);
-int  GDALARLockBuffer(GDALAsyncReaderH hARIO, double dfTimeout);
-void  GDALARUnlockBuffer(GDALAsyncReaderH hARIO);
+    int *pnYBufSize) nothrow @nogc;
+int  GDALARLockBuffer(GDALAsyncReaderH hARIO, double dfTimeout) nothrow @nogc;
+void  GDALARUnlockBuffer(GDALAsyncReaderH hARIO) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Helper functions.                                               */
 /* -------------------------------------------------------------------- */
-int  GDALGeneralCmdLineProcessor(int nArgc, char ***ppapszArgv, int nOptions);
-void  GDALSwapWords(void *pData, int nWordSize, int nWordCount, int nWordSkip);
+int  GDALGeneralCmdLineProcessor(int nArgc, char ***ppapszArgv, int nOptions) nothrow @nogc;
+void  GDALSwapWords(void *pData, int nWordSize, int nWordCount, int nWordSkip) nothrow @nogc;
 void  GDALSwapWordsEx(void *pData, int nWordSize, size_t nWordCount, 
-    int nWordSkip);
+    int nWordSkip) nothrow @nogc;
 
 void  GDALCopyWords(void *pSrcData, GDALDataType eSrcType, int nSrcPixelOffset, 
-    void *pDstData, GDALDataType eDstType, int nDstPixelOffset, int nWordCount);
+    void *pDstData, GDALDataType eDstType, int nDstPixelOffset, int nWordCount) nothrow @nogc;
 
 extern (C):
 void  GDALCopyBits(GByte *pabySrcData, int nSrcOffset, int nSrcStep, 
     GByte *pabyDstData, int nDstOffset, int nDstStep, int nBitCount, 
-    int nStepCount);
+    int nStepCount) nothrow @nogc;
 
-extern (Windows):
-int  GDALLoadWorldFile(const char *, double *);
-int  GDALReadWorldFile(const char *, const char *, double *);
-int  GDALWriteWorldFile(const char *, const char *, double *);
-int  GDALLoadTabFile(const char *, double *, char **, int *, GDAL_GCP **);
-int  GDALReadTabFile(const char *, double *, char **, int *, GDAL_GCP **);
-int  GDALLoadOziMapFile(const char *, double *, char **, int *, GDAL_GCP **);
-int  GDALReadOziMapFile(const char *, double *, char **, int *, GDAL_GCP **);
+extern (System):
+int  GDALLoadWorldFile(const char *, double *) nothrow @nogc;
+int  GDALReadWorldFile(const char *, const char *, double *) nothrow @nogc;
+int  GDALWriteWorldFile(const char *, const char *, double *) nothrow @nogc;
+int  GDALLoadTabFile(const char *, double *, char **, int *, GDAL_GCP **) nothrow @nogc;
+int  GDALReadTabFile(const char *, double *, char **, int *, GDAL_GCP **) nothrow @nogc;
+int  GDALLoadOziMapFile(const char *, double *, char **, int *, GDAL_GCP **) nothrow @nogc;
+int  GDALReadOziMapFile(const char *, double *, char **, int *, GDAL_GCP **) nothrow @nogc;
 
-const(char) * GDALDecToDMS(double , const char *, int );
-double  GDALPackedDMSToDec(double );
-double  GDALDecToPackedDMS(double );
+const(char) * GDALDecToDMS(double , const char *, int ) nothrow @nogc;
+double  GDALPackedDMSToDec(double ) nothrow @nogc;
+double  GDALDecToPackedDMS(double ) nothrow @nogc;
 
 /* Note to developers : please keep this section in sync with ogr_core.h */
-const(char)* GDALVersionInfo( const char * );
+const(char)* GDALVersionInfo( const char * ) nothrow @nogc;
 int GDALCheckVersion( int nVersionMajor, int nVersionMinor,
-    const char* pszCallingComponentName);
+    const char* pszCallingComponentName) nothrow @nogc;
 
 /** Helper macro for GDALCheckVersion()
   @see GDALCheckVersion()
   */
-void GDAL_CHECK_VERSION(const char* pszCallingComponentName)
+void GDAL_CHECK_VERSION(const char* pszCallingComponentName) nothrow @nogc
 {  
   GDALCheckVersion(GDAL_VERSION_MAJOR, GDAL_VERSION_MINOR, 
     pszCallingComponentName);
@@ -793,8 +793,8 @@ extern (C):
 alias _N29 GDALRPCInfo;
 
 //C     int CPL_DLL CPL_STDCALL GDALExtractRPCInfo( char **, GDALRPCInfo * );
-extern (Windows):
-int  GDALExtractRPCInfo(char **, GDALRPCInfo *);
+extern (System):
+int  GDALExtractRPCInfo(char **, GDALRPCInfo *) nothrow @nogc;
 
 /* ==================================================================== */
 /*      Color tables.                                                   */
@@ -811,17 +811,17 @@ struct _N30
 extern (C):
 alias _N30 GDALColorEntry;
 
-extern (Windows):
-GDALColorTableH  GDALCreateColorTable(GDALPaletteInterp );
-void  GDALDestroyColorTable(GDALColorTableH );
-GDALColorTableH  GDALCloneColorTable(GDALColorTableH );
-GDALPaletteInterp  GDALGetPaletteInterpretation(GDALColorTableH );
-int  GDALGetColorEntryCount(GDALColorTableH );
-GDALColorEntry * GDALGetColorEntry(GDALColorTableH , int );
-int  GDALGetColorEntryAsRGB(GDALColorTableH , int , GDALColorEntry *);
-void  GDALSetColorEntry(GDALColorTableH , int , GDALColorEntry *);
+extern (System):
+GDALColorTableH  GDALCreateColorTable(GDALPaletteInterp ) nothrow @nogc;
+void  GDALDestroyColorTable(GDALColorTableH ) nothrow @nogc;
+GDALColorTableH  GDALCloneColorTable(GDALColorTableH ) nothrow @nogc;
+GDALPaletteInterp  GDALGetPaletteInterpretation(GDALColorTableH ) nothrow @nogc;
+int  GDALGetColorEntryCount(GDALColorTableH ) nothrow @nogc;
+GDALColorEntry * GDALGetColorEntry(GDALColorTableH , int ) nothrow @nogc;
+int  GDALGetColorEntryAsRGB(GDALColorTableH , int , GDALColorEntry *) nothrow @nogc;
+void  GDALSetColorEntry(GDALColorTableH , int , GDALColorEntry *) nothrow @nogc;
 void  GDALCreateColorRamp(GDALColorTableH hTable, int nStartIndex, 
-    GDALColorEntry *psStartColor, int nEndIndex, GDALColorEntry *psEndColor);
+    GDALColorEntry *psStartColor, int nEndIndex, GDALColorEntry *psEndColor) nothrow @nogc;
 
 /* ==================================================================== */
 /*      Raster Attribute Table				                            */
@@ -862,65 +862,65 @@ enum
 }
 alias int GDALRATFieldUsage;
 
-extern (Windows):
+extern (System):
 GDALRasterAttributeTableH  GDALCreateRasterAttributeTable();
-void  GDALDestroyRasterAttributeTable(GDALRasterAttributeTableH );
+void  GDALDestroyRasterAttributeTable(GDALRasterAttributeTableH ) nothrow @nogc;
 
-int  GDALRATGetColumnCount(GDALRasterAttributeTableH );
+int  GDALRATGetColumnCount(GDALRasterAttributeTableH ) nothrow @nogc;
 
-const(char) * GDALRATGetNameOfCol(GDALRasterAttributeTableH , int );
-GDALRATFieldUsage  GDALRATGetUsageOfCol(GDALRasterAttributeTableH , int );
-GDALRATFieldType  GDALRATGetTypeOfCol(GDALRasterAttributeTableH , int );
+const(char) * GDALRATGetNameOfCol(GDALRasterAttributeTableH , int ) nothrow @nogc;
+GDALRATFieldUsage  GDALRATGetUsageOfCol(GDALRasterAttributeTableH , int ) nothrow @nogc;
+GDALRATFieldType  GDALRATGetTypeOfCol(GDALRasterAttributeTableH , int ) nothrow @nogc;
 
-int  GDALRATGetColOfUsage(GDALRasterAttributeTableH , GDALRATFieldUsage );
-int  GDALRATGetRowCount(GDALRasterAttributeTableH );
+int  GDALRATGetColOfUsage(GDALRasterAttributeTableH , GDALRATFieldUsage ) nothrow @nogc;
+int  GDALRATGetRowCount(GDALRasterAttributeTableH ) nothrow @nogc;
 
-const(char) * GDALRATGetValueAsString(GDALRasterAttributeTableH , int , int );
-int  GDALRATGetValueAsInt(GDALRasterAttributeTableH , int , int );
-double  GDALRATGetValueAsDouble(GDALRasterAttributeTableH , int , int );
+const(char) * GDALRATGetValueAsString(GDALRasterAttributeTableH , int , int ) nothrow @nogc;
+int  GDALRATGetValueAsInt(GDALRasterAttributeTableH , int , int ) nothrow @nogc;
+double  GDALRATGetValueAsDouble(GDALRasterAttributeTableH , int , int ) nothrow @nogc;
 
-void  GDALRATSetValueAsString(GDALRasterAttributeTableH , int , int , const char *);
-void  GDALRATSetValueAsInt(GDALRasterAttributeTableH , int , int , int );
-void  GDALRATSetValueAsDouble(GDALRasterAttributeTableH , int , int , double );
+void  GDALRATSetValueAsString(GDALRasterAttributeTableH , int , int , const char *) nothrow @nogc;
+void  GDALRATSetValueAsInt(GDALRasterAttributeTableH , int , int , int ) nothrow @nogc;
+void  GDALRATSetValueAsDouble(GDALRasterAttributeTableH , int , int , double ) nothrow @nogc;
 
-int  GDALRATChangesAreWrittenToFile(GDALRasterAttributeTableH hRAT);
+int  GDALRATChangesAreWrittenToFile(GDALRasterAttributeTableH hRAT) nothrow @nogc;
 
 CPLErr  GDALRATValuesIOAsDouble(GDALRasterAttributeTableH hRAT, 
     GDALRWFlag eRWFlag, int iField, int iStartRow, int iLength, 
-    double *pdfData);
+    double *pdfData) nothrow @nogc;
 CPLErr  GDALRATValuesIOAsInteger(GDALRasterAttributeTableH hRAT, 
-    GDALRWFlag eRWFlag, int iField, int iStartRow, int iLength, int *pnData);
+    GDALRWFlag eRWFlag, int iField, int iStartRow, int iLength, int *pnData) nothrow @nogc;
 CPLErr  GDALRATValuesIOAsString(GDALRasterAttributeTableH hRAT, 
     GDALRWFlag eRWFlag, int iField, int iStartRow, int iLength, 
-    char **papszStrList);
+    char **papszStrList) nothrow @nogc;
 
-void  GDALRATSetRowCount(GDALRasterAttributeTableH , int );
+void  GDALRATSetRowCount(GDALRasterAttributeTableH , int ) nothrow @nogc;
 CPLErr  GDALRATCreateColumn(GDALRasterAttributeTableH , const char *,
- GDALRATFieldType , GDALRATFieldUsage );
-CPLErr  GDALRATSetLinearBinning(GDALRasterAttributeTableH , double , double );
-int  GDALRATGetLinearBinning(GDALRasterAttributeTableH , double *, double *);
+ GDALRATFieldType , GDALRATFieldUsage ) nothrow @nogc;
+CPLErr  GDALRATSetLinearBinning(GDALRasterAttributeTableH , double , double ) nothrow @nogc;
+int  GDALRATGetLinearBinning(GDALRasterAttributeTableH , double *, double *) nothrow @nogc;
 CPLErr  GDALRATInitializeFromColorTable(GDALRasterAttributeTableH , 
-    GDALColorTableH );
+    GDALColorTableH ) nothrow @nogc;
 GDALColorTableH  GDALRATTranslateToColorTable(GDALRasterAttributeTableH , 
-    int nEntryCount);
-void  GDALRATDumpReadable(GDALRasterAttributeTableH , FILE *);
-GDALRasterAttributeTableH  GDALRATClone(GDALRasterAttributeTableH );
+    int nEntryCount) nothrow @nogc;
+void  GDALRATDumpReadable(GDALRasterAttributeTableH , FILE *) nothrow @nogc;
+GDALRasterAttributeTableH  GDALRATClone(GDALRasterAttributeTableH ) nothrow @nogc;
 
-void * GDALRATSerializeJSON(GDALRasterAttributeTableH );
+void * GDALRATSerializeJSON(GDALRasterAttributeTableH ) nothrow @nogc;
 
-int  GDALRATGetRowOfValue(GDALRasterAttributeTableH , double );
+int  GDALRATGetRowOfValue(GDALRasterAttributeTableH , double ) nothrow @nogc;
 
 /* ==================================================================== */
 /*      GDAL Cache Management                                           */
 /* ==================================================================== */
 
-void  GDALSetCacheMax(int nBytes);
-int  GDALGetCacheMax();
-int  GDALGetCacheUsed();
-void  GDALSetCacheMax64(GIntBig nBytes);
-GIntBig  GDALGetCacheMax64();
-GIntBig  GDALGetCacheUsed64();
-int  GDALFlushCacheBlock();
+void  GDALSetCacheMax(int nBytes) nothrow @nogc;
+int  GDALGetCacheMax() nothrow @nogc;
+int  GDALGetCacheUsed() nothrow @nogc;
+void  GDALSetCacheMax64(GIntBig nBytes) nothrow @nogc;
+GIntBig  GDALGetCacheMax64() nothrow @nogc;
+GIntBig  GDALGetCacheUsed64() nothrow @nogc;
+int  GDALFlushCacheBlock() nothrow @nogc;
 
 /* ==================================================================== */
 /*      GDAL virtual memory                                             */
@@ -976,10 +976,10 @@ CPLVirtualMem * GDALRasterBandGetTiledVirtualMem(GDALRasterBandH hBand,
 
 GDALDatasetH  GDALCreatePansharpenedVRT(const char *pszXML, 
     GDALRasterBandH hPanchroBand, int nInputSpectralBands, 
-    GDALRasterBandH *pahInputSpectralBands);
+    GDALRasterBandH *pahInputSpectralBands) nothrow @nogc;
 
 /* =================================================================== */
 /*      Misc API                                                        */
 /* ==================================================================== */
 
-CPLXMLNode * GDALGetJPEG2000Structure(const char *pszFilename, char **papszOptions);
+CPLXMLNode * GDALGetJPEG2000Structure(const char *pszFilename, char **papszOptions) nothrow @nogc;

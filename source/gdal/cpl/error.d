@@ -83,39 +83,39 @@ enum CPLE_AWSSignatureDoesNotMatch = 16;
 /* 100 - 299 reserved for GDAL */
 
 
-void  CPLError(CPLErr eErrClass, CPLErrorNum err_no, const(char) *fmt,...);
-void  CPLErrorV(CPLErr , CPLErrorNum , const(char) *, va_list );
-void  CPLEmergencyError(const(char) *);
+void  CPLError(CPLErr eErrClass, CPLErrorNum err_no, const(char) *fmt,...) nothrow @nogc;
+void  CPLErrorV(CPLErr , CPLErrorNum , const(char) *, va_list ) nothrow @nogc;
+void  CPLEmergencyError(const(char) *) nothrow @nogc;
 
-extern (Windows):
-void  CPLErrorReset();
-CPLErrorNum  CPLGetLastErrorNo();
-CPLErr  CPLGetLastErrorType();
-const(char) * CPLGetLastErrorMsg();
-void * CPLGetErrorHandlerUserData();
+extern (System):
+void  CPLErrorReset() nothrow @nogc;
+CPLErrorNum  CPLGetLastErrorNo() nothrow @nogc;
+CPLErr  CPLGetLastErrorType() nothrow @nogc;
+const(char) * CPLGetLastErrorMsg() nothrow @nogc;
+void * CPLGetErrorHandlerUserData() nothrow @nogc;
 
 extern (C):
-void  CPLErrorSetState(CPLErr eErrClass, CPLErrorNum err_no, const(char) *pszMsg);
-void  CPLCleanupErrorMutex();
+void  CPLErrorSetState(CPLErr eErrClass, CPLErrorNum err_no, const(char) *pszMsg) nothrow @nogc;
+void  CPLCleanupErrorMutex() nothrow @nogc;
 
 alias void  function(CPLErr , CPLErrorNum , const(char) *)CPLErrorHandler;
 
-extern (Windows):
-void  CPLLoggingErrorHandler(CPLErr , CPLErrorNum , const(char) *);
-void  CPLDefaultErrorHandler(CPLErr , CPLErrorNum , const(char) *);
-void  CPLQuietErrorHandler(CPLErr , CPLErrorNum , const(char) *);
+extern (System):
+void  CPLLoggingErrorHandler(CPLErr , CPLErrorNum , const(char) *) nothrow @nogc;
+void  CPLDefaultErrorHandler(CPLErr , CPLErrorNum , const(char) *) nothrow @nogc;
+void  CPLQuietErrorHandler(CPLErr , CPLErrorNum , const(char) *) nothrow @nogc;
 
 extern (C):
-void  CPLTurnFailureIntoWarning(int bOn);
+void  CPLTurnFailureIntoWarning(int bOn) nothrow @nogc;
 
-extern (Windows):
-CPLErrorHandler  CPLSetErrorHandler(CPLErrorHandler );
-CPLErrorHandler  CPLSetErrorHandlerEx(CPLErrorHandler , void *);
-void  CPLPushErrorHandler(CPLErrorHandler );
-void  CPLPushErrorHandlerEx(CPLErrorHandler , void *);
-void  CPLSetCurrentErrorHandlerCatchDebug(int bCatchDebug);
-void  CPLPopErrorHandler();
-void  _CPLAssert(const(char) *, const(char) *, int );
+extern (System):
+CPLErrorHandler  CPLSetErrorHandler(CPLErrorHandler ) nothrow @nogc;
+CPLErrorHandler  CPLSetErrorHandlerEx(CPLErrorHandler , void *) nothrow @nogc;
+void  CPLPushErrorHandler(CPLErrorHandler ) nothrow @nogc;
+void  CPLPushErrorHandlerEx(CPLErrorHandler , void *) nothrow @nogc;
+void  CPLSetCurrentErrorHandlerCatchDebug(int bCatchDebug) nothrow @nogc;
+void  CPLPopErrorHandler() nothrow @nogc;
+void  _CPLAssert(const(char) *, const(char) *, int ) nothrow @nogc;
 
 /*
  * Helper macros used for input parameters validation.

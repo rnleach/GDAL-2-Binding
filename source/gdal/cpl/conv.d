@@ -48,14 +48,14 @@ import core.stdc.stdio : FILE;
 /*      Runtime check of various configuration items.                   */
 /* -------------------------------------------------------------------- */
 extern (C):
-void  CPLVerifyConfiguration();
+void  CPLVerifyConfiguration() nothrow @nogc;
 
-extern (Windows):
-const(char) * CPLGetConfigOption(const(char) *, const(char) *);
-const(char) * CPLGetThreadLocalConfigOption(const(char) *, const(char) *);
-void  CPLSetConfigOption(const(char) *, const(char) *);
-void  CPLSetThreadLocalConfigOption(const(char) *pszKey, const(char) *pszValue);
-void  CPLFreeConfig();
+extern (System):
+const(char) * CPLGetConfigOption(const(char) *, const(char) *) nothrow @nogc;
+const(char) * CPLGetThreadLocalConfigOption(const(char) *, const(char) *) nothrow @nogc;
+void  CPLSetConfigOption(const(char) *, const(char) *) nothrow @nogc;
+void  CPLSetThreadLocalConfigOption(const(char) *pszKey, const(char) *pszValue) nothrow @nogc;
+void  CPLFreeConfig() nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Safe malloc() API.  Thin cover over VSI functions with fatal    */
@@ -63,105 +63,105 @@ void  CPLFreeConfig();
 /* -------------------------------------------------------------------- */
 //C     void CPL_DLL *CPLMalloc( size_t ) CPL_WARN_UNUSED_RESULT;
 extern (C):
-void * CPLMalloc(size_t );
-void * CPLCalloc(size_t , size_t );
-void * CPLRealloc(void *, size_t );
-char * CPLStrdup(char *);
-char * CPLStrlwr(char *);
+void * CPLMalloc(size_t ) nothrow @nogc;
+void * CPLCalloc(size_t , size_t ) nothrow @nogc;
+void * CPLRealloc(void *, size_t ) nothrow @nogc;
+char * CPLStrdup(char *) nothrow @nogc;
+char * CPLStrlwr(char *) nothrow @nogc;
 
 alias VSIFree CPLFree;
 /* -------------------------------------------------------------------- */
 /*      Read a line from a text file, and strip of CR/LF.               */
 /* -------------------------------------------------------------------- */
-char * CPLFGets(char *, int , FILE *);
-const(char) * CPLReadLine(FILE *);
-const(char) * CPLReadLineL(VSILFILE *);
-const(char) * CPLReadLine2L(VSILFILE *, int nMaxCols, char **papszOptions);
+char * CPLFGets(char *, int , FILE *) nothrow @nogc;
+const(char) * CPLReadLine(FILE *) nothrow @nogc;
+const(char) * CPLReadLineL(VSILFILE *) nothrow @nogc;
+const(char) * CPLReadLine2L(VSILFILE *, int nMaxCols, char **papszOptions) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Convert ASCII string to floating point number                   */
 /*      (THESE FUNCTIONS ARE NOT LOCALE AWARE!).                        */
 /* -------------------------------------------------------------------- */
-double  CPLAtof(const(char) *);
-double  CPLAtofDelim(const(char) *, char );
-double  CPLStrtod(const(char) *, char **);
-double  CPLStrtodDelim(const(char) *, char **, char );
-float  CPLStrtof(const(char) *, char **);
-float  CPLStrtofDelim(const(char) *, char **, char );
+double  CPLAtof(const(char) *) nothrow @nogc;
+double  CPLAtofDelim(const(char) *, char ) nothrow @nogc;
+double  CPLStrtod(const(char) *, char **) nothrow @nogc;
+double  CPLStrtodDelim(const(char) *, char **, char ) nothrow @nogc;
+float  CPLStrtof(const(char) *, char **) nothrow @nogc;
+float  CPLStrtofDelim(const(char) *, char **, char ) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Convert number to string.  This function is locale agnostic     */
 /*      (i.e. it will support "," or "." regardless of current locale)  */
 /* -------------------------------------------------------------------- */
-double  CPLAtofM(const(char) *);
+double  CPLAtofM(const(char) *) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Read a numeric value from an ASCII character string.            */
 /* -------------------------------------------------------------------- */
-char * CPLScanString(const(char) *, int , int , int );
-double  CPLScanDouble(const(char) *, int );
-int  CPLScanLong(const(char) *, int );
-uint  CPLScanULong(const(char) *, int );
-GUIntBig  CPLScanUIntBig(const(char) *, int );
-GIntBig  CPLAtoGIntBig(const(char) *pszString);
-GIntBig  CPLAtoGIntBigEx(const(char) *pszString, int bWarn, int *pbOverflow);
-void * CPLScanPointer(const(char) *, int );
+char * CPLScanString(const(char) *, int , int , int ) nothrow @nogc;
+double  CPLScanDouble(const(char) *, int ) nothrow @nogc;
+int  CPLScanLong(const(char) *, int ) nothrow @nogc;
+uint  CPLScanULong(const(char) *, int ) nothrow @nogc;
+GUIntBig  CPLScanUIntBig(const(char) *, int ) nothrow @nogc;
+GIntBig  CPLAtoGIntBig(const(char) *pszString) nothrow @nogc;
+GIntBig  CPLAtoGIntBigEx(const(char) *pszString, int bWarn, int *pbOverflow) nothrow @nogc;
+void * CPLScanPointer(const(char) *, int ) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Print a value to an ASCII character string.                     */
 /* -------------------------------------------------------------------- */
-int  CPLPrintString(char *, const(char) *, int );
-int  CPLPrintStringFill(char *, const(char) *, int );
-int  CPLPrintInt32(char *, GInt32 , int );
-int  CPLPrintUIntBig(char *, GUIntBig , int );
-int  CPLPrintDouble(char *, const(char) *, double , const(char) *);
+int  CPLPrintString(char *, const(char) *, int ) nothrow @nogc;
+int  CPLPrintStringFill(char *, const(char) *, int ) nothrow @nogc;
+int  CPLPrintInt32(char *, GInt32 , int ) nothrow @nogc;
+int  CPLPrintUIntBig(char *, GUIntBig , int ) nothrow @nogc;
+int  CPLPrintDouble(char *, const(char) *, double , const(char) *) nothrow @nogc;
 //int  CPLPrintTime(char *, int , const(char) *, tm *, const(char) *);
-int  CPLPrintPointer(char *, void *, int );
+int  CPLPrintPointer(char *, void *, int ) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Fetch a function from DLL / so.                                 */
 /* -------------------------------------------------------------------- */
 
-void * CPLGetSymbol(const(char) *, const(char) *);
+void * CPLGetSymbol(const(char) *, const(char) *) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Fetch executable path.                                          */
 /* -------------------------------------------------------------------- */
-int  CPLGetExecPath(char *pszPathBuf, int nMaxLength);
+int  CPLGetExecPath(char *pszPathBuf, int nMaxLength) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Filename handling functions.                                    */
 /* -------------------------------------------------------------------- */
-const(char) * CPLGetPath(const(char) *);
-const(char) * CPLGetDirname(const(char) *);
-const(char) * CPLGetFilename(const(char) *);
-const(char) * CPLGetBasename(const(char) *);
-const(char) * CPLGetExtension(const(char) *);
-char * CPLGetCurrentDir();
-const(char) * CPLFormFilename(const(char) *pszPath, const(char) *pszBasename, const(char) *pszExtension);
-const(char) * CPLFormCIFilename(const(char) *pszPath, const(char) *pszBasename, const(char) *pszExtension);
-const(char) * CPLResetExtension(const(char) *, const(char) *);
-const(char) * CPLProjectRelativeFilename(const(char) *pszProjectDir, const(char) *pszSecondaryFilename);
-int  CPLIsFilenameRelative(const(char) *pszFilename);
-const(char) * CPLExtractRelativePath(const(char) *, const(char) *, int *);
-const(char) * CPLCleanTrailingSlash(const(char) *);
-char ** CPLCorrespondingPaths(const(char) *pszOldFilename, const(char) *pszNewFilename, char **papszFileList);
-int  CPLCheckForFile(char *pszFilename, char **papszSiblingList);
+const(char) * CPLGetPath(const(char) *) nothrow @nogc;
+const(char) * CPLGetDirname(const(char) *) nothrow @nogc;
+const(char) * CPLGetFilename(const(char) *) nothrow @nogc;
+const(char) * CPLGetBasename(const(char) *) nothrow @nogc;
+const(char) * CPLGetExtension(const(char) *) nothrow @nogc;
+char * CPLGetCurrentDir() nothrow @nogc;
+const(char) * CPLFormFilename(const(char) *pszPath, const(char) *pszBasename, const(char) *pszExtension) nothrow @nogc;
+const(char) * CPLFormCIFilename(const(char) *pszPath, const(char) *pszBasename, const(char) *pszExtension) nothrow @nogc;
+const(char) * CPLResetExtension(const(char) *, const(char) *) nothrow @nogc;
+const(char) * CPLProjectRelativeFilename(const(char) *pszProjectDir, const(char) *pszSecondaryFilename) nothrow @nogc;
+int  CPLIsFilenameRelative(const(char) *pszFilename) nothrow @nogc;
+const(char) * CPLExtractRelativePath(const(char) *, const(char) *, int *) nothrow @nogc;
+const(char) * CPLCleanTrailingSlash(const(char) *) nothrow @nogc;
+char ** CPLCorrespondingPaths(const(char) *pszOldFilename, const(char) *pszNewFilename, char **papszFileList) nothrow @nogc;
+int  CPLCheckForFile(char *pszFilename, char **papszSiblingList) nothrow @nogc;
 
-const(char) * CPLGenerateTempFilename(const(char) *pszStem);
+const(char) * CPLGenerateTempFilename(const(char) *pszStem) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Find File Function                                              */
 /* -------------------------------------------------------------------- */
 alias const(char) * function(const(char) *, const(char) *)CPLFileFinder;
 
-const(char) * CPLFindFile(const(char) *pszClass, const(char) *pszBasename);
-const(char) * CPLDefaultFindFile(const(char) *pszClass, const(char) *pszBasename);
-void  CPLPushFileFinder(CPLFileFinder pfnFinder);
-CPLFileFinder  CPLPopFileFinder();
-void  CPLPushFinderLocation(const(char) *);
-void  CPLPopFinderLocation();
-void  CPLFinderClean();
+const(char) * CPLFindFile(const(char) *pszClass, const(char) *pszBasename) nothrow @nogc;
+const(char) * CPLDefaultFindFile(const(char) *pszClass, const(char) *pszBasename) nothrow @nogc;
+void  CPLPushFileFinder(CPLFileFinder pfnFinder) nothrow @nogc;
+CPLFileFinder  CPLPopFileFinder() nothrow @nogc;
+void  CPLPushFinderLocation(const(char) *) nothrow @nogc;
+void  CPLPopFinderLocation() nothrow @nogc;
+void  CPLFinderClean() nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Reference counted file handle manager.  Makes sharing file      */
@@ -177,54 +177,54 @@ struct _N2
 }
 alias _N2 CPLSharedFileInfo;
 
-FILE * CPLOpenShared(const(char) *, const(char) *, int );
-void  CPLCloseShared(FILE *);
-CPLSharedFileInfo * CPLGetSharedList(int *);
-void  CPLDumpSharedList(FILE *);
-void  CPLCleanupSharedFileMutex();
+FILE * CPLOpenShared(const(char) *, const(char) *, int ) nothrow @nogc;
+void  CPLCloseShared(FILE *) nothrow @nogc;
+CPLSharedFileInfo * CPLGetSharedList(int *) nothrow @nogc;
+void  CPLDumpSharedList(FILE *) nothrow @nogc;
+void  CPLCleanupSharedFileMutex() nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      DMS to Dec to DMS conversion.                                   */
 /* -------------------------------------------------------------------- */
-double  CPLDMSToDec(const(char) *);
-const(char) * CPLDecToDMS(double dfAngle, const(char) *pszAxis, int nPrecision);
-double  CPLPackedDMSToDec(double );
-double  CPLDecToPackedDMS(double dfDec);
+double  CPLDMSToDec(const(char) *) nothrow @nogc;
+const(char) * CPLDecToDMS(double dfAngle, const(char) *pszAxis, int nPrecision) nothrow @nogc;
+double  CPLPackedDMSToDec(double ) nothrow @nogc;
+double  CPLDecToPackedDMS(double dfDec) nothrow @nogc;
 
-void  CPLStringToComplex(const(char) *pszString, double *pdfReal, double *pdfImag);
+void  CPLStringToComplex(const(char) *pszString, double *pdfReal, double *pdfImag) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Misc other functions.                                           */
 /* -------------------------------------------------------------------- */
-int  CPLUnlinkTree(const(char) *);
-int  CPLCopyFile(const(char) *pszNewPath, const(char) *pszOldPath);
-int  CPLCopyTree(const(char) *pszNewPath, const(char) *pszOldPath);
-int  CPLMoveFile(const(char) *pszNewPath, const(char) *pszOldPath);
-int  CPLSymlink(const(char) *pszOldPath, const(char) *pszNewPath, char **papszOptions);
+int  CPLUnlinkTree(const(char) *) nothrow @nogc;
+int  CPLCopyFile(const(char) *pszNewPath, const(char) *pszOldPath) nothrow @nogc;
+int  CPLCopyTree(const(char) *pszNewPath, const(char) *pszOldPath) nothrow @nogc;
+int  CPLMoveFile(const(char) *pszNewPath, const(char) *pszOldPath) nothrow @nogc;
+int  CPLSymlink(const(char) *pszOldPath, const(char) *pszNewPath, char **papszOptions) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      ZIP Creation.                                                   */
 /* -------------------------------------------------------------------- */
-void * CPLCreateZip(const(char) *pszZipFilename, char **papszOptions);
-CPLErr  CPLCreateFileInZip(void *hZip, const(char) *pszFilename, char **papszOptions);
-CPLErr  CPLWriteFileInZip(void *hZip, void *pBuffer, int nBufferSize);
-CPLErr  CPLCloseFileInZip(void *hZip);
-CPLErr  CPLCloseZip(void *hZip);
+void * CPLCreateZip(const(char) *pszZipFilename, char **papszOptions) nothrow @nogc;
+CPLErr  CPLCreateFileInZip(void *hZip, const(char) *pszFilename, char **papszOptions) nothrow @nogc;
+CPLErr  CPLWriteFileInZip(void *hZip, void *pBuffer, int nBufferSize) nothrow @nogc;
+CPLErr  CPLCloseFileInZip(void *hZip) nothrow @nogc;
+CPLErr  CPLCloseZip(void *hZip) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      ZLib compression                                                */
 /* -------------------------------------------------------------------- */
 
-void * CPLZLibDeflate(void *ptr, size_t nBytes, int nLevel, void *outptr, size_t nOutAvailableBytes, size_t *pnOutBytes);
-void * CPLZLibInflate(void *ptr, size_t nBytes, void *outptr, size_t nOutAvailableBytes, size_t *pnOutBytes);
+void * CPLZLibDeflate(void *ptr, size_t nBytes, int nLevel, void *outptr, size_t nOutAvailableBytes, size_t *pnOutBytes) nothrow @nogc;
+void * CPLZLibInflate(void *ptr, size_t nBytes, void *outptr, size_t nOutAvailableBytes, size_t *pnOutBytes) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      XML validation.                                                 */
 /* -------------------------------------------------------------------- */
-int  CPLValidateXML(const(char) *pszXMLFilename, const(char) *pszXSDFilename, char **papszOptions);
+int  CPLValidateXML(const(char) *pszXMLFilename, const(char) *pszXSDFilename, char **papszOptions) nothrow @nogc;
 
 /* -------------------------------------------------------------------- */
 /*      Locale handling. Prevents parallel executions of setlocale().   */
 /* -------------------------------------------------------------------- */
-char * CPLsetlocale(int category, const(char) *locale);
-void  CPLCleanupSetlocaleMutex();
+char * CPLsetlocale(int category, const(char) *locale) nothrow @nogc;
+void  CPLCleanupSetlocaleMutex() nothrow @nogc;
