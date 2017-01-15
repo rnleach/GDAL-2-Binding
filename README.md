@@ -21,8 +21,8 @@ CPLFree is necessary to free (usually) strings returned by some gdal functions.
 
 ## Bugs
 The most likely bugs will relate to the use of `const`. The mapping from C to D is not so straightforward, 
-and so much of this was done by hand. The nothrow and @nogc function attributes have been added to all the 
-functions, but pure has not been added in many places it could be. There are so many functions, this will be
+and so much of this was done by hand. The `nothrow` and `@nogc` function attributes have been added to all the 
+functions, but `pure` has not been added in many places it could be. There are so many functions, this will be
 addressed on an as needed basis.
 
 ## Memory Management
