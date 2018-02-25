@@ -1,3 +1,7 @@
+# Searching for a home
+If you have the time and energy to maintain this repo, I'll give it to you. I'm not using D-lang very much 
+anymore, and not at all with GDAL. 
+
 # GDAL-2-Binding
 D language binding to GDAL C interface
 
