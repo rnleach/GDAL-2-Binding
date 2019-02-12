@@ -9,6 +9,9 @@ homepage "https://github.com/rnleach/GDAL-2-Binding"
 targetName "GDAL-2-Binding"
 targetType "sourceLibrary"
 
+// support linking on non-windows (see #3)
+libs "gdal" platform="posix"
+
 //
 // htod ported header files for GDAL. Keep these for reference for updating
 // the bindings later, but do not include them in the compilation.
